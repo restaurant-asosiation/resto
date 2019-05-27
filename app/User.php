@@ -36,4 +36,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Database Relation
+    public function locker()
+    {
+        return $this->belongsToMany(Locker::class);
+    }
+
+    public function restaurant()
+    {
+        return $this->belongsToMany(Restaurant::class);
+    }
+
+    public function resign()
+    {
+        return $this->hasMany(Resign::class);
+    }
+
+    public function rating()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }
