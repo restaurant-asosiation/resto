@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Locker;
 
-class Locker extends Controller
+class LockerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,9 @@ class Locker extends Controller
      */
     public function index()
     {
-        //
+        $data['lockers'] = Locker::get();
+        // dd($data);
+        return view('admin.owner.index', $data);
     }
 
     /**
