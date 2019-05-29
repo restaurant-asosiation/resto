@@ -46,7 +46,7 @@ class VacancyController extends Controller
         ]);
 
         $vacancy = new Vacancy;
-        $vacancy->restaurant_id = auth()->id();
+        $vacancy->restaurant_id = 1;
         $vacancy->position = $request->position;
         $vacancy->job_desc = $request->job_desc;
         $vacancy->salary = $request->salary;

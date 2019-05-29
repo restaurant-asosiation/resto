@@ -1,4 +1,4 @@
-@extends('templates.owner.owner_default')
+@extends('templates.admin.admin_default')
 
 @section('title')
 <h2>New Vacancy</h2>
