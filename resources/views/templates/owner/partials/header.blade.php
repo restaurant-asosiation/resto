@@ -63,6 +63,14 @@
           <i class="fas fa-fw fa-chart-area"></i>
           <span>My Employee</span></a>
       </li>
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('owner.pelamar.index') }}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Calon Pegawai</span></a>
+      </li>
+
       <li class="nav-item 
         @if (Request::is('owner/locker','owner/locker/*'))
           active

@@ -28,6 +28,13 @@ Route::get('/view1', function () {
 
 Route::prefix('owner')->name('owner.')->group(function(){
     Route::resource('vacancy', 'Owner\VacancyController');
+    Route::resource('list', 'Owner\listcontroller');
     // Route::get('/locker/destroy/{locker}', 'Owner\LockerController@destroy')->name('locker.delete');
 });
 
+
+
+
+// Route::get('/list', function () {
+//     // return view('list');
+// });
