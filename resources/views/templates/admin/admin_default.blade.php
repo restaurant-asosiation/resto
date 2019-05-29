@@ -1,4 +1,4 @@
-@include('templates/owner/partials/header')
+@include('templates/admin/partials/header')
 
 <div id="content-wrapper">
 
@@ -25,4 +25,4 @@
 </div>
 <!-- /#wrapper -->
 
-@include('templates/owner/partials/footer')
+@include('templates/admin/partials/footer')

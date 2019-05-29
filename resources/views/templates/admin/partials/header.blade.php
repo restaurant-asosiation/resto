@@ -12,13 +12,13 @@
   <title>Owner</title>
 
   <!-- Custom fonts for this template-->
-  <link href="{{ asset('assets/owner/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('assets/admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   
   <!-- Page level plugin CSS-->
-  <link href="{{ asset('assets/owner/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/admin/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="{{ asset('assets/owner/css/sb-admin.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/admin/css/sb-admin.css') }}" rel="stylesheet">
 
 </head>
 
@@ -64,13 +64,6 @@
           <span>My Employee</span></a>
       </li>
 
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('owner.pelamar.index') }}">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Calon Pegawai</span></a>
-      </li>
-
       <li class="nav-item 
         @if (Request::is('owner/locker','owner/locker/*'))
           active
@@ -95,3 +88,6 @@
           <span>Rating</span></a>
       </li>
     </ul>
+
+    @include('templates/admin/partials/sidebar_owner')
+

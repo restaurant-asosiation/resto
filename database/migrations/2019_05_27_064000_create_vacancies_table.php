@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLockersTable extends Migration
+class CreateVacanciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateLockersTable extends Migration
      */
     public function up()
     {
-        Schema::create('lockers', function (Blueprint $table) {
+        Schema::create('vacancies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('position');
             $table->text('job_desc');
             $table->text('requirement');
             $table->integer('salary');
-            // $table->text('address');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateLockersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lockers');
+        Schema::dropIfExists('vacancies');
     }
 }
