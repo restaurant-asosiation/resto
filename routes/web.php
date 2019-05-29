@@ -25,3 +25,8 @@ Route::prefix('owner')->name('owner.')->group(function(){
     Route::resource('vacancy', 'Owner\VacancyController');
     // Route::get('/locker/destroy/{locker}', 'Owner\LockerController@destroy')->name('locker.delete');
 });
+
+Route::prefix('user')->name('user.')->group(function(){
+    Route::resource('home', 'UserController');
+    Route::resource('formprofile', 'UserController')->name('complete.profile');
+});
