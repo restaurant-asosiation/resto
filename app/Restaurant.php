@@ -16,9 +16,9 @@ class Restaurant extends Model
         return $this->hasMany(Address::class);
     }
 
-    public function locker()
+    public function vacancy()
     {
-        return $this->hasMany(Locker::class);
+        return $this->hasMany(Vacancy::class);
     }
 
     public function rating()

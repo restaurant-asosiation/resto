@@ -40,9 +40,9 @@ class User extends Authenticatable
     ];
 
     //Database Relation
-    public function locker()
+    public function vacancy()
     {
-        return $this->belongsToMany(Locker::class);
+        return $this->belongsToMany(Vacancy::class);
     }
 
     public function restaurant()

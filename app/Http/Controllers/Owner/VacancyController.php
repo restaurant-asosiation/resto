@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Locker;
 use App\Mylibs\WithHelper;
+use App\Vacancy;
 
 class VacancyController extends Controller
 {
@@ -16,7 +16,7 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        $data['vacancies'] = Locker::get();
+        $data['vacancies'] = Vacancy::get();
         return view('owner.vacancy.index', $data);
     }
 
@@ -45,7 +45,7 @@ class VacancyController extends Controller
             'requirement' => 'required',
         ]);
 
-        $vacancy = new Locker;
+        $vacancy = new Vacancy;
         $vacancy->restaurant_id = auth()->id();
         $vacancy->position = $request->position;
         $vacancy->job_desc = $request->job_desc;
@@ -76,7 +76,7 @@ class VacancyController extends Controller
      */
     public function edit($id)
     {
-        $data['vacancy'] = Locker::find($id);
+        $data['vacancy'] = Vacancy::find($id);
         return view('owner.vacancy.edit', $data);
     }
 
@@ -96,7 +96,7 @@ class VacancyController extends Controller
             'requirement' => 'required',
         ]);
 
-        $vacancy = Locker::find($id);
+        $vacancy = Vacancy::find($id);
         $vacancy->position = $request->position;
         $vacancy->job_desc = $request->job_desc;
         $vacancy->salary = $request->salary;
@@ -115,7 +115,7 @@ class VacancyController extends Controller
      */
     public function destroy(WithHelper $withHelper, $id)
     {
-        $vacancy = Locker::find($id);
+        $vacancy = Vacancy::find($id);
         $deleted = $vacancy->delete();
         $with = $withHelper->withCheck($deleted);
         return redirect()->route('owner.vacancy.index')->with($with['withKey'], $with['withValue']);

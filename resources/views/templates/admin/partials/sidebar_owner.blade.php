@@ -12,7 +12,7 @@
         <span>My Employee</span></a>
     </li>
     <li class="nav-item 
-      @if (Request::is('owner/locker','owner/locker/*'))
+      @if (Request::is('owner/vacancy','owner/vacancy/*'))
         active
       @endif">
       <a class="nav-link" href="{{ route('owner.vacancy.index') }}">

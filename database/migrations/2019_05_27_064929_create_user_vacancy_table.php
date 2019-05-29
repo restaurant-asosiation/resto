@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLockerUserTable extends Migration
+class CreateUserVacancyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateLockerUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('locker_user', function (Blueprint $table) {
+        Schema::create('user_vacancy', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->unsignedBigInteger('locker_id');
-            $table->foreign('locker_id')->references('id')->on('lockers')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->unsignedBigInteger('vacancy_id');
+            $table->foreign('vacancy_id')->references('id')->on('vacancies')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateLockerUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locker_user');
+        Schema::dropIfExists('user_vacancy');
     }
 }
