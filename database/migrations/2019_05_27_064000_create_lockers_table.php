@@ -19,7 +19,7 @@ class CreateLockersTable extends Migration
             $table->text('job_desc');
             $table->text('requirement');
             $table->integer('salary');
-            $table->text('address');
+            // $table->text('address');
             $table->timestamps();
         });
     }

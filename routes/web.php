@@ -13,14 +13,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return view('templates/owner/owner_default');
+    return view('welcome');
+    // return view('templates/owner/owner_default');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('admin/owner')->name('admin.owner.')->group(function(){
-    Route::resource('locker', 'Owner\LockerController');
+Route::prefix('owner')->name('owner.')->group(function(){
+    Route::resource('vacancy', 'Owner\VacancyController');
+    // Route::get('/locker/destroy/{locker}', 'Owner\LockerController@destroy')->name('locker.delete');
 });
