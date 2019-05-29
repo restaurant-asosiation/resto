@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,20 @@
 
 Route::get('/', function () {
     return view('welcome');
+    // return view('templates/owner/owner_default');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 Route::get('/view1', function () {
     return view('viewcalonpegawai');
 });
+
+Route::prefix('owner')->name('owner.')->group(function(){
+    Route::resource('vacancy', 'Owner\VacancyController');
+    // Route::get('/locker/destroy/{locker}', 'Owner\LockerController@destroy')->name('locker.delete');
+});
+
