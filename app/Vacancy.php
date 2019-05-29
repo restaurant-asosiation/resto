@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Locker extends Model
+class Vacancy extends Model
 {
     public function user()
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function restaurant()
