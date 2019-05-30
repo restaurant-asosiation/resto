@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mylibs\WithHelper;
+use App\Pelamar;
 
 class PelamarController extends Controller
 {
@@ -15,7 +17,7 @@ class PelamarController extends Controller
     public function index()
     {
         $data['vacancies'] = Locker::get();
-        return view('owner.vacancy.index', $data);
+        return view('owner.pelamar.list', $data);
     }
 
     /**
@@ -26,6 +28,7 @@ class PelamarController extends Controller
     public function create()
     {
         //
+        // return view('owner.pelamar.list');
     }
 
     /**
@@ -37,6 +40,24 @@ class PelamarController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            
+            'name' => 'required',
+            'address' => 'required',
+            'requirement' => 'required',
+            'position' => 'required',
+        ]);
+
+        $vacancy = new Vacancy;
+        $vacancy->restaurant_id = auth()->id();
+        $vacancy->name = $request->name;
+        $vacancy->address = $request->address;
+        $vacancy->requirement = $request->requirement;
+        $vacancy->position = $request->position;
+        $saved = $pelamar->save();
+        $with = $withHelper->withCheck($saved);
+        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
+
     }
 
     /**
@@ -59,6 +80,8 @@ class PelamarController extends Controller
     public function edit($id)
     {
         //
+        // $data['vacancy'] = Vacancy::find($id);
+        // return view('owner.vacancy.edit', $data);
     }
 
     /**
@@ -71,6 +94,24 @@ class PelamarController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            
+            'name' => 'required',
+            'address' => 'required',
+            'requirement' => 'required',
+            'position' => 'required',
+        ]);
+
+        $vacancy = new Vacancy;
+        $vacancy->restaurant_id = auth()->id();
+        $vacancy->name = $request->name;
+        $vacancy->address = $request->address;
+        $vacancy->requirement = $request->requirement;
+        $vacancy->position = $request->position;
+        $saved = $pelamar->save();
+        $with = $withHelper->withCheck($saved);
+        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
+
     }
 
     /**
@@ -82,5 +123,9 @@ class PelamarController extends Controller
     public function destroy($id)
     {
         //
+        $pelamar = Pelamar::find($id);
+        $deleted = $pelamar->delete();
+        $with = $withHelper->withCheck($deleted);
+        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
     }
 }
