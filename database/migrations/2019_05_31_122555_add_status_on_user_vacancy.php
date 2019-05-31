@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddressesTable extends Migration
+class AddStatusOnUserVacancy extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('province');
-            $table->string('city');
-            $table->string('address');
-            $table->timestamps();
+        Schema::table('user_vacancy', function (Blueprint $table) {
+            $table->enum('status', ['processed', 'accepted', 'rejected'])->after('vacancy_id')->default('processed');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::table('user_vacancy', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -18,8 +18,11 @@ class CreateRestaurantsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('telephone', 14);
-            $table->text('deskripsi');
-            $table->string('logo');
+            $table->text('description');
+            $table->string('province');
+            $table->string('city');
+            $table->string('address');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

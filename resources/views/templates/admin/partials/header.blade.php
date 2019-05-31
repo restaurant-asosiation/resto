@@ -49,5 +49,3 @@
   </nav>
 
   <div id="wrapper">
-
-    @include('templates/admin/partials/sidebar_owner')

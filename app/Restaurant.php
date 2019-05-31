@@ -10,11 +10,6 @@ class Restaurant extends Model
     {
         return $this->belongsToMany(User::class);
     }
-    
-    public function address()
-    {
-        return $this->hasMany(Address::class);
-    }
 
     public function vacancy()
     {
