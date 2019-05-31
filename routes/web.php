@@ -28,7 +28,7 @@ Route::get('/view1', function () {
 
 Route::prefix('owner')->name('owner.')->group(function(){
     Route::resource('vacancy', 'Owner\VacancyController');
-    Route::resource('list', 'Owner\PelamarController');
+    Route::resource('pelamar', 'Owner\PelamarController');
     // Route::get('/locker/destroy/{locker}', 'Owner\LockerController@destroy')->name('locker.delete');
 });
 

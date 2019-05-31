@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Owner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mylibs\WithHelper;
-use App\Pelamar;
+use App\Vacancy;
 
 class PelamarController extends Controller
 {
@@ -16,7 +16,7 @@ class PelamarController extends Controller
      */
     public function index()
     {
-        $data['vacancies'] = Locker::get();
+        $data['vacancies'] = Vacancy::get();
         return view('owner.pelamar.list', $data);
     }
 
@@ -123,8 +123,8 @@ class PelamarController extends Controller
     public function destroy($id)
     {
         //
-        $pelamar = Pelamar::find($id);
-        $deleted = $pelamar->delete();
+        $vacancy = Vacancy::find($id);
+        $deleted = $vacancy->delete();
         $with = $withHelper->withCheck($deleted);
         return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
     }

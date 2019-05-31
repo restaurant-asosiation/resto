@@ -1,4 +1,8 @@
-@extends('templates.owner.owner_default')
+@extends('templates.admin.admin_default')
+
+@section('sidebar')
+    @include('templates/admin/partials/sidebar_owner')
+@endsection
 
 @section('title')
 <h2>Calon pegawai</h2>
@@ -23,6 +27,7 @@
                     <th>Address</th>
                     <th>Requirement</th>
                     <th>Position</th>
+                    <th>Action</th>
                     
                 </thead>
                 <tbody>
@@ -38,7 +43,7 @@
                             <td>{{ $pelamar->Requirement }}</td>
                             <td>{{ $pelamar->Position }}</td>
                             <td>
-                                <a href="{{ route('owner.pelamar.Lihat', $pelamar) }}" class="btn btn-primary">Lihat</a>
+                                <a href="{{ route('owner.pelamar.view', $pelamar) }}" class="btn btn-primary">View</a>
                                 <a href="{{ route('owner.pelamar.destroy', $pelamar) }}" class="btn btn-primary">Delete</a>
                             </td>
                         </tr>
@@ -54,7 +59,7 @@
                         <th>Address</th>
                         <th>Requirement</th>
                         <th>Position</th>
-                       
+                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>

@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="charts.html">
+      <a class="nav-link" href="{{ route('owner.pelamar.index') }}">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>My Employee</span></a>
     </li>
