@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('owner.pelamar.index') }}">
+      <a class="nav-link" href="tables.html">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>My Employee</span></a>
     </li>
@@ -20,7 +20,7 @@
         <span>Job Vacancy</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link" href="{{ route('owner.pelamar.index') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Recruitment</span></a>
     </li>

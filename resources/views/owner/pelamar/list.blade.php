@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<h2>Calon pegawai</h2>
+<h2>Calon Pegawai</h2>
 @endsection
 
 @section('content')
@@ -25,8 +25,10 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Address</th>
-                    <th>Requirement</th>
                     <th>Position</th>
+                    <th>Job Description</th>
+                    <th>Requirement</th>
+                    <th>Salary</th>
                     <th>Action</th>
                     
                 </thead>
@@ -40,8 +42,12 @@
                             <th scope="row">{{ $no }}</th>
                             <td>{{ $pelamar->Name }}</td>
                             <td>{{ $pelamar->Address }}</td>
-                            <td>{{ $pelamar->Requirement }}</td>
                             <td>{{ $pelamar->Position }}</td>
+                            <td>{{ $pelamar->job_desc }}</td>
+                            <td>{{ $pelamar->Requirement }}</td>
+                            <td>{{ $pelamar->salary }}</td>
+                            
+                           
                             <td>
                                 <a href="{{ route('owner.pelamar.view', $pelamar) }}" class="btn btn-primary">View</a>
                                 <a href="{{ route('owner.pelamar.destroy', $pelamar) }}" class="btn btn-primary">Delete</a>
@@ -54,12 +60,15 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Requirement</th>
-                        <th>Position</th>
-                        <th>Action</th>
+                         <th>#</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Position</th>
+                    <th>Job Description</th>
+                    <th>Requirement</th>
+                    <th>Salary</th>
+                    <th>Action</th>
+                       
                     </tr>
                 </tfoot>
             </table>
