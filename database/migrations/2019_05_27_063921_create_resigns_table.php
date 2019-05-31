@@ -18,7 +18,7 @@ class CreateResignsTable extends Migration
             $table->string('upload_resign');
             $table->date('date');
             $table->string('reason');
-            $table->enum('resign_status', ['diterima', 'ditolak'])->nullable();
+            $table->enum('resign_status', ['processed', 'accepted', 'rejected'])->default('processed');
             $table->timestamps();
         });
     }

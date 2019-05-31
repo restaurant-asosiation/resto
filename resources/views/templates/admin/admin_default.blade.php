@@ -1,5 +1,7 @@
 @include('templates/admin/partials/header')
 
+@yield('sidebar')
+
 <div id="content-wrapper">
 
   <div class="container-fluid">
