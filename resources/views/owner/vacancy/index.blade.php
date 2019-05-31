@@ -38,8 +38,14 @@
                             <td>{{ $vacancy->requirement }}</td>
                             <td>{{ $vacancy->salary }}</td>
                             <td>
-                                <a href="{{ route('owner.vacancy.edit', $vacancy) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ route('owner.vacancy.destroy', $vacancy) }}" class="btn btn-primary">Delete</a>
+                                <form action="{{ route('owner.vacancy.destroy', $vacancy) }}" method="post">
+                                <a href="{{ route('owner.vacancy.edit', $vacancy) }}" class="btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                    @csrf
+                                    @method("DELETE")
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-minus-square"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @php
