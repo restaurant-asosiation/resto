@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('owner')->name('owner.')->group(function(){
+Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
+    Route::get('/{user}', 'Owner\OwnerDashboardController@index');
     Route::resource('vacancy', 'Owner\VacancyController');
 });
