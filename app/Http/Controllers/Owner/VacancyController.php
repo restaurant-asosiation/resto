@@ -74,9 +74,10 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Vacancy $vacancy)
     {
-        $data['vacancy'] = Vacancy::find($id);
+        // $data['vacancy'] = Vacancy::find($id);
+        $data['vacancy'] = $vacancy;
         return view('owner.vacancy.edit', $data);
     }
 

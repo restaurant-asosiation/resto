@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class OwnerDashboardController extends Controller
 {
@@ -12,9 +13,9 @@ class OwnerDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('owner.vacancy.create');
+        return view('owner.dashboard.index');
     }
 
     /**
