@@ -1,3 +1,10 @@
+@section('navbarUrl')
+    {{ route('owner.index') }}
+@endsection
+@section('navbarName')
+    {{ auth()->user()->name }}
+@endsection
+
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav">
     <li class="nav-item">
