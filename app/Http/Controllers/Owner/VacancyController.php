@@ -19,7 +19,7 @@ class VacancyController extends Controller
         $data['vacancies'] = Vacancy::get();
         return view('owner.vacancy.index', $data);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +29,7 @@ class VacancyController extends Controller
     {
         return view('owner.vacancy.create');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
