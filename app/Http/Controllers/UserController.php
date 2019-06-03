@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Vacancy;
+use App\User;
 
 class UserController extends Controller
 {
@@ -13,10 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $vacancies = Vacancy::get();
+        $vacancies = Vacancy::get();
 
         // dd($posts);
-        return view('templates.user.user-home');
+        return view('templates.user.user_index');
     }
 
     /**
@@ -26,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('templates.user.user_form');
     }
 
     /**
@@ -37,7 +40,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'telephone' => 'required',
+            'address' => 'required',
+            'sex' => 'required',
+            'birth_day' => 'required',
+        ]);
+
+        $imagePath = $request->file('image')->store('user');
+        $cvPath = $request->file('cv')->store('user');
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->slug = Str::slug($request->name);
+        $user->telephone = $request->telephone;
+        $user->sex = $request->sex;
+        $user->birth_day = $request->birth_day;
+        $user->address = $request->address;
+        $user->image = $imagePath;
+        $user->cv = $cvPath;
+        $saved = $user->save();
+        // $with = $withHelper->withCheck($saved);
+        // return redirect()->route('user.index')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('user.index');
     }
 
     /**
@@ -48,7 +74,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

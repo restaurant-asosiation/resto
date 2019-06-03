@@ -26,9 +26,9 @@ Route::prefix('owner')->name('owner.')->group(function(){
 
 });
 
-Route::prefix('user')->name('user.')->group(function(){
-    Route::resource('home', 'UserController');
-    // Route::resource('formprofile', 'UserController')->name('complete.profile');
+Route::prefix('user')->middleware('auth')->name('user.')->group(function(){
+    Route::resource('/', 'UserController');
+
 
 
 });

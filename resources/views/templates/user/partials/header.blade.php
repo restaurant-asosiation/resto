@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Jobstart &mdash; Colorlib Website Template</title>
+    <title>Asosiasi Resto</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -45,7 +45,7 @@
         <div class="row align-items-center">
           
           <div class="col-6 col-xl-2">
-            <h1 class="mb-0"><a href="index.html" class="text-black h2 mb-0">Job<strong>start</strong></a></h1>
+            <h1 class="mb-0"><a href="index.html" class="text-black h2 mb-0">Asosiasi<strong>Resto</strong></a></h1>
           </div>
 
           <div class="col-10 col-xl-10 d-none d-xl-block">
@@ -53,20 +53,9 @@
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li class="active"><a href="index.html">Home</a></li>
-                <li class="has-children">
-                  <a href="category.html">Category</a>
-                  <ul class="dropdown">
-                    <li><a href="#">Full Time</a></li>
-                    <li><a href="#">Part Time</a></li>
-                    <li><a href="#">Freelance</a></li>
-                    <li><a href="#">Internship</a></li>
-                    <li><a href="#">Termporary</a></li>
-                  </ul>
-                </li>
-                <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="new-post.html"><span class="rounded bg-primary py-2 px-3 text-white"><span class="h5 mr-2">+</span> Post a Job</span></a></li>
+                <li><a href="{{ route('user.create') }}"><span class="rounded bg-primary py-2 px-3 text-white"><span class="h5 mr-2"></span> Login </span></a></li>
               </ul>
             </nav>
           </div>
