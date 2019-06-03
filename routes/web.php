@@ -22,6 +22,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
-    Route::get('/{user}', 'Owner\OwnerDashboardController@index');
-    Route::resource('vacancy', 'Owner\VacancyController');
+    Route::resource('dashboard', 'Owner\OwnerDashboardController');
+    
+    Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
+        Route::resource('dashboard', 'Owner\DashboardController');
+        Route::resource('vacancy', 'Owner\VacancyController');
+    });
 });

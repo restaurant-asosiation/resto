@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Restaurant;
 
 class DashboardController extends Controller
 {
@@ -12,9 +13,11 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Restaurant $restaurant)
     {
-        //
+        $data['restaurant'] = $restaurant;
+        // dd($data);
+        return view('owner.restaurant.dashboard.index', $data);
     }
 
     /**

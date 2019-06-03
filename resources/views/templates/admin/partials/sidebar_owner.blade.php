@@ -1,5 +1,5 @@
 @section('navbarUrl')
-    {{ route('owner.index') }}
+    {{ route('owner.dashboard.index', auth()->user()) }}
 @endsection
 @section('navbarName')
     {{ auth()->user()->name }}
@@ -8,7 +8,7 @@
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="{{ route( 'owner.restaurant.dashboard.index', $restaurant) }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
       </a>
@@ -22,7 +22,7 @@
       @if (Request::is('owner/vacancy','owner/vacancy/*'))
         active
       @endif">
-      <a class="nav-link" href="{{ route('owner.vacancy.index') }}">
+      <a class="nav-link" href="{{ route( 'owner.restaurant.vacancy.index',  $restaurant) }}">
         <i class="fas fa-briefcase"></i>
         <span>Job Vacancy</span></a>
     </li>
