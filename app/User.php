@@ -39,6 +39,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //return slug on URI
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     //Database Relation
     public function vacancy()
     {
