@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mylibs\WithHelper;
 use App\Vacancy;
+use App\Restaurant;
 
 class VacancyController extends Controller
 {
@@ -14,29 +15,32 @@ class VacancyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Restaurant $restaurant)
     {
+        $data['restaurant'] = $restaurant;
         $data['vacancies'] = Vacancy::get();
-        return view('owner.vacancy.index', $data);
+        // dd($data);
+        return view('owner.restaurant.vacancy.index', $data);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Restaurant $restaurant)
     {
-        return view('owner.vacancy.create');
+        $data['restaurant'] = $restaurant;
+        return view('owner.restaurant.vacancy.create', $data);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, WithHelper $withHelper)
+    public function store(Request $request, Restaurant $restaurant)
     {
         $this->validate($request, [
             'position' => 'required',
@@ -52,8 +56,10 @@ class VacancyController extends Controller
         $vacancy->salary = $request->salary;
         $vacancy->requirement = $request->requirement;
         $saved = $vacancy->save();
+        $withHelper = new WithHelper;
         $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.vacancy.index')->with($with['withKey'], $with['withValue']);
+
+        return redirect()->route('owner.restaurant.vacancy.index', $restaurant)->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -74,11 +80,11 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vacancy $vacancy)
+    public function edit(Restaurant $restaurant, Vacancy $vacancy)
     {
-        // $data['vacancy'] = Vacancy::find($id);
         $data['vacancy'] = $vacancy;
-        return view('owner.vacancy.edit', $data);
+        $data['restaurant'] = $restaurant;
+        return view('owner.restaurant.vacancy.edit', $data);
     }
 
     /**
@@ -88,7 +94,7 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WithHelper $withHelper, $id)
+    public function update(Request $request, WithHelper $withHelper, Restaurant $restaurant, Vacancy $vacancy)
     {
         $this->validate($request, [
             'position' => 'required',
@@ -97,14 +103,14 @@ class VacancyController extends Controller
             'requirement' => 'required',
         ]);
 
-        $vacancy = Vacancy::find($id);
         $vacancy->position = $request->position;
         $vacancy->job_desc = $request->job_desc;
         $vacancy->salary = $request->salary;
         $vacancy->requirement = $request->requirement;
         $saved = $vacancy->save();
         $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.vacancy.index')->with($with['withKey'], $with['withValue']);
+
+        return redirect()->route('owner.restaurant.vacancy.index', $restaurant)->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -114,11 +120,12 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WithHelper $withHelper, $id)
+    public function destroy(WithHelper $withHelper, Restaurant $restaurant, $id)
     {
         $vacancy = Vacancy::find($id);
         $deleted = $vacancy->delete();
         $with = $withHelper->withCheck($deleted);
-        return redirect()->route('owner.vacancy.index')->with($with['withKey'], $with['withValue']);
+
+        return redirect()->route('owner.restaurant.vacancy.index', $restaurant)->with($with['withKey'], $with['withValue']);
     }
 }

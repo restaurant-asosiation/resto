@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+// use App\Restaurant;
+use App\Mylibs\WithHelper;
+use Illuminate\Support\Str;
 use App\User;
 
 class OwnerDashboardController extends Controller
@@ -15,7 +18,8 @@ class OwnerDashboardController extends Controller
      */
     public function index(User $user)
     {
-        return view('owner.dashboard.index');
+        $data['restaurants'] = User::find(auth()->id())->restaurant()->get();
+        return view('owner.dashboard.index', $data);
     }
 
     /**
@@ -25,7 +29,7 @@ class OwnerDashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('owner.dashboard.create');
     }
 
     /**
@@ -36,7 +40,34 @@ class OwnerDashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'telephone' => 'required',
+            'description' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+        ]);
+
+        $restaurant = new Restaurant;
+        $restaurant->name = $request->name;
+        $restaurant->slug = Str::slug($request->name);
+        $restaurant->telephone = $request->telephone;
+        $restaurant->description = $request->description;
+        $restaurant->province = $request->province;
+        $restaurant->city = $request->city;
+        $restaurant->address = $request->address;
+        if ($request->hasFile('logo')) {
+            $restaurant->logo = $request->file('logo')->store('storage');;
+        }
+        $saved = $restaurant->save();
+        
+        $user = User::find(auth()->id());
+        $user->restaurant()->attach($restaurant->id);
+
+        $withHelper = new WithHelper;
+        $with = $withHelper->withCheck($saved);
+        return redirect()->route('owner.dashboard.index')->with($with['withKey'], $with['withValue']);
     }
 
     /**
@@ -45,9 +76,9 @@ class OwnerDashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant)
     {
-        //
+        return view('owner.restaurant.dashboard.index');
     }
 
     /**

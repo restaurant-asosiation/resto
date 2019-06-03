@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
+    //slug
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    //relations
     public function user()
     {
         return $this->belongsToMany(User::class);

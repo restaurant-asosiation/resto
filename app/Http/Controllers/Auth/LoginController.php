@@ -31,7 +31,7 @@ class LoginController extends Controller
         {
             // return redirect()->route('admin.AdminDashboardController');
         } elseif (auth()->user()->hasRole('owner')) {
-            return redirect()->route('owner.', auth()->user());
+            return redirect()->route('owner.dashboard.index');
         } elseif (auth()->user()->hasRole('employee')) {
             // return redirect()->route('owner.', auth()->user());
         }
