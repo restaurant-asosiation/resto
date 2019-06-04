@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Str;
+use App\Role;
 
 class RegisterController extends Controller
 {
@@ -24,6 +25,13 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    public function showRegistrationForm()
+    {
+        $roles = Role::get();
+        $data['roles'] = $roles;
+        return view('auth.register', $data);
+    }
+    
     /**
      * Where to redirect users after registration.
      *
