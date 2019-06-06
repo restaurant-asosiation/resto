@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -19,13 +20,30 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    
+    /**
+     * Check user's role and redirect user based on their role
+     * @return 
+     */
+    public function authenticated()
+    {
+        if(auth()->user()->hasRole('admin'))
+        {
+            // return redirect()->route('admin.AdminDashboardController');
+        } elseif (auth()->user()->hasRole('owner')) {
+            return redirect()->route('owner.dashboard.index');
+        } elseif (auth()->user()->hasRole('employee')) {
+            // return redirect()->route('owner.', auth()->user());
+        }
 
+        return redirect('/user/dashboard');
+    }
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.

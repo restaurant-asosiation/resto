@@ -21,22 +21,24 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::get('/view1', function () {
     return view('viewcalonpegawai');
 });
 
-Route::prefix('owner')->name('owner.')->group(function(){
-    Route::resource('vacancy', 'Owner\VacancyController');
-    // dd(Route::get('pelamar', 'Owner\PelamarController@list')->name('pelamar.list'));
-    Route::resource('pelamar', 'Owner\PelamarController');
-    Route::resource('pegawai', 'Owner\PegawaiController');
-    // Route::get('/locker/destroy/{locker}', 'Owner\LockerController@destroy')->name('locker.delete');
+Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
+    Route::resource('dashboard', 'Owner\OwnerDashboardController');
+    
+    Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
+        Route::resource('dashboard', 'Owner\DashboardController');
+        Route::resource('vacancy', 'Owner\VacancyController');
+        Route::resource('pelamar', 'Owner\PelamarController');
+        Route::resource('pegawai', 'Owner\PegawaiController');
+    });
 });
-
 
 
 
 // Route::get('/list', function () {
 //     return view('list');
 // });
+

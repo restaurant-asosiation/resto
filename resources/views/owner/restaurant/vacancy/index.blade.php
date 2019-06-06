@@ -1,12 +1,16 @@
 @extends('templates.admin.admin_default')
 
+@section('sidebar') {{-- @yield in admin_default --}}
+    @include('templates.admin.partials.sidebar_owner', ['restaurant' => $restaurant])
+@endsection
+
 @section('title')
 <h2>Job Vacancy</h2>
 @endsection
 
 @section('content')
 <div class="card mb-3 border-0">
-    <a href="{{ route('owner.vacancy.create') }}" class="btn btn-primary mr-0 ml-auto">New Vacancy</a>
+    <a href="{{ route('owner.restaurant.vacancy.create', $restaurant) }}" class="btn btn-primary mr-0 ml-auto">New Vacancy</a>
 </div>
 <!-- DataTables Example -->
 <div class="card mb-3">
@@ -38,8 +42,8 @@
                             <td>{{ $vacancy->requirement }}</td>
                             <td>{{ $vacancy->salary }}</td>
                             <td>
-                                <form action="{{ route('owner.vacancy.destroy', $vacancy) }}" method="post">
-                                <a href="{{ route('owner.vacancy.edit', $vacancy) }}" class="btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                <form action="{{ route('owner.restaurant.vacancy.destroy', ['restaurant'=>$restaurant, 'vacancy'=>$vacancy]) }}" method="post">
+                                <a href="{{ route('owner.restaurant.vacancy.edit', ['vacancy'=>$vacancy, 'restaurant'=>$restaurant]) }}" class="btn btn-primary"><i class="fas fa-pen-square"></i></a>
                                     @csrf
                                     @method("DELETE")
                                     <button type="submit" class="btn btn-danger">
