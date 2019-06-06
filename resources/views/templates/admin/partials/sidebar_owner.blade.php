@@ -7,7 +7,10 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+     @if (Request::is('owner/pegawai','owner/pegawai/*'))
+        active
+      @endif">
+      <a class="nav-link" href="">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>My Employee</span></a>
     </li>
@@ -20,7 +23,10 @@
         <span>Job Vacancy</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('owner.pelamar.index') }}">
+    @if (Request::is('owner/pelamar','owner/pelamar/*'))
+        active
+      @endif">
+      <a class="nav-link" href="{{ route('owner.pelamar.list') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Recruitment</span></a>
     </li>
@@ -32,6 +38,6 @@
     <li class="nav-item">
       <a class="nav-link" href="tables.html">
         <i class="fas fa-fw fa-table"></i>
-        <span>Rating</span></a>
+        <span>Rate</span></a>
     </li>
   </ul>

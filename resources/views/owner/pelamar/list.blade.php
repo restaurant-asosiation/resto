@@ -37,19 +37,18 @@
                         $no = 1;
                     @endphp
 
-                    @foreach ($vacancies as $vacancy)
+                    @foreach ($vacancies as $pelamar)
                         <tr>
                             <th scope="row">{{ $no }}</th>
-                            <td>{{ $pelamar->Name }}</td>
-                            <td>{{ $pelamar->Address }}</td>
-                            <td>{{ $pelamar->Position }}</td>
+                            <td>{{ $pelamar->name }}</td>
+                            <td>{{ $pelamar->address }}</td>
+                            <td>{{ $pelamar->position }}</td>
                             <td>{{ $pelamar->job_desc }}</td>
-                            <td>{{ $pelamar->Requirement }}</td>
+                            <td>{{ $pelamar->requirement }}</td>
                             <td>{{ $pelamar->salary }}</td>
-                            
-                           
                             <td>
-                                <a href="{{ route('owner.pelamar.view', $pelamar) }}" class="btn btn-primary">View</a>
+                            
+                                <a href="{{ route('owner.pelamar.terima', $pelamar) }}" class="btn btn-primary">Terima</a>
                                 <a href="{{ route('owner.pelamar.destroy', $pelamar) }}" class="btn btn-primary">Delete</a>
                             </td>
                         </tr>

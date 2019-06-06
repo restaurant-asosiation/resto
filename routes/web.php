@@ -28,7 +28,9 @@ Route::get('/view1', function () {
 
 Route::prefix('owner')->name('owner.')->group(function(){
     Route::resource('vacancy', 'Owner\VacancyController');
+    // dd(Route::get('pelamar', 'Owner\PelamarController@list')->name('pelamar.list'));
     Route::resource('pelamar', 'Owner\PelamarController');
+    Route::resource('pegawai', 'Owner\PegawaiController');
     // Route::get('/locker/destroy/{locker}', 'Owner\LockerController@destroy')->name('locker.delete');
 });
 
@@ -36,5 +38,5 @@ Route::prefix('owner')->name('owner.')->group(function(){
 
 
 // Route::get('/list', function () {
-//     // return view('list');
+//     return view('list');
 // });

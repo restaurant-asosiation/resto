@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Mylibs\WithHelper;
 use App\Vacancy;
 
-class PelamarController extends Controller
+class PegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class PelamarController extends Controller
     public function index()
     {
         $data['vacancies'] = Vacancy::get();
-        return view('owner.pelamar.list', $data);
+        return view('owner.pegawai.index', $data);
     }
 
     /**
@@ -42,6 +42,7 @@ class PelamarController extends Controller
         //
         $this->validate($request, [
             
+            'NIP' => 'required',
             'name' => 'required',
             'address' => 'required',
             'position' => 'required',
@@ -53,15 +54,16 @@ class PelamarController extends Controller
 
         $vacancy = new Vacancy;
         $vacancy->restaurant_id = auth()->id();
+        $vacancy->NIP = $request->NIP;
         $vacancy->name = $request->name;
         $vacancy->address = $request->address;
         $vacancy->position = $request->position;
         $vacancy->job_description = $request->job_description;
         $vacancy->requirement = $request->requirement;
         $vacancy->salary = $request->salary;
-        $saved = $pelamar->save();
+        $saved = $pegawai->save();
         $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('owner.pelamar.index')->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -101,6 +103,7 @@ class PelamarController extends Controller
         //
         $this->validate($request, [
             
+            'NIP' => 'required',
             'name' => 'required',
             'address' => 'required',
             'position' => 'required',
@@ -111,15 +114,16 @@ class PelamarController extends Controller
 
         $vacancy = new Vacancy;
         $vacancy->restaurant_id = auth()->id();
+        $vacancy->NIP = $request->NIP;
         $vacancy->name = $request->name;
         $vacancy->address = $request->address;
         $vacancy->position = $request->position;
         $vacancy->job_description = $request->job_description;
         $vacancy->requirement = $request->requirement;
         $vacancy->salary = $request->salary;
-        $saved = $pelamar->save();
+        $saved = $pegawai->save();
         $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('owner.pegawai.index')->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -135,11 +139,6 @@ class PelamarController extends Controller
         $vacancy = Vacancy::find($id);
         $deleted = $vacancy->delete();
         $with = $withHelper->withCheck($deleted);
-        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
-    }
-
-    public function list()
-    {
-        return view('a');
+        return redirect()->route('owner.pegawai.index')->with($with['withKey'], $with['withValue']);
     }
 }
