@@ -31,6 +31,15 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     });
 });
 
+<<<<<<< HEAD
 Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
     Route::resource('/', 'UserController');
+=======
+Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
+    Route::resource('dashboard', 'Admin\AdminDashboardController');
+    Route::resource('addaccount', 'Admin\AdminDashboardController');
+    //resource fungsi pemanggilan dalam landing page admin
+    
+    
+>>>>>>> origin/master
 });
