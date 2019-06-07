@@ -10,7 +10,7 @@
 
 @section('content')
 
-<form action="{{ route('owner.vacancy.update', $vacancy) }}" method="post">
+<form action="{{ route('owner.restaurant.vacancy.update', ['restaurant'=>$restaurant, $vacancy]) }}" method="post">
     <div class="card mb-3 px-0 mx-auto">
         <div class="card-header">
             <i class="fas fa-table"></i>

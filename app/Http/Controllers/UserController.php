@@ -29,7 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('templates.user.user_form');
+        // $users = User::get();
+
+        // return view('templates.user.user_form', ['users'  => $users]);
     }
 
     /**
@@ -83,9 +85,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, User $user)
     {
-        //
+        $users = User::find($id);
+
+        return view('templates.user.user_form', ['users'  => $users]);
     }
 
     /**
@@ -95,9 +99,38 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:10',
+            'telephone' => 'required|min:10',
+            'address' => 'required',
+        ], [
+            'required' => ':attribute Harus Diisi'
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->telephone = $request->telephone;
+        $user->sex = $request->sex;
+        $user->birth_day = $request->birth_day;
+        $user->address = $request->address;
+        $user->sex = $request->sex;
+
+        if($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('user');
+            Storage::delete($post->image);
+            $post->image = $imagePath;
+        }
+
+        if($request->hasFile('cv')) {
+            $cvPath = $request->file('cv')->store('user');
+            Storage::delete($user->cv);
+            $user->cv = $cvPath;
+        }
+
+        $user->save();
+        return redirect()->route('user.index');
     }
 
     /**

@@ -21,14 +21,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('owner')->name('owner.')->group(function(){
-    Route::resource('vacancy', 'Owner\VacancyController');
 
+Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
+    Route::resource('dashboard', 'Owner\OwnerDashboardController');
+    
+    Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
+        Route::resource('dashboard', 'Owner\DashboardController');
+        Route::resource('vacancy', 'Owner\VacancyController');
+    });
 });
 
-Route::prefix('user')->middleware('auth')->name('user.')->group(function(){
+Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
     Route::resource('/', 'UserController');
-
-
-
 });

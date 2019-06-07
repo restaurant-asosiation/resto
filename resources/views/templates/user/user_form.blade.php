@@ -19,15 +19,22 @@
                         @csrf
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
+                                <label class="font-weight-bold" for="email">Email</label>
+                                <input type="text" id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ $users->email }}"
+                                     name="email" disabled>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Nama Lengkap</label>
-                                <input type="text" id="username" class="form-control {{ $errors->has('fullname') ? 'is-invalid' : '' }}" value="{{ old('fullname') }}"
+                                <input type="text" id="username" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name') }}"
                                     placeholder="Your Username" name="name">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="password">Nomor Handphone</label>
-                                <input type="text" id="password" class="form-control {{ $errors->has('phonenumber') ? 'is-invalid' : '' }}" value="{{ old('phonenumber') }}"
+                                <input type="text" id="password" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ old('telephone') }}"
                                     placeholder="Your Password" name="telephone">
                             </div>
                         </div>
@@ -54,14 +61,14 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="font-weight-bold" for="username">Foto Profil </label><span>
+                                <label class="font-weight-bold" for="fotoprofil">Foto Profil </label><span>
                                 </span>
                                 <input type="file" name="image">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
-                                <label class="font-weight-bold" for="username">Upload CV </label><span>
+                                <label class="font-weight-bold" for="cv">Upload CV </label><span>
                                 </span>
                                 <input type="file" name="cv">
                             </div>
