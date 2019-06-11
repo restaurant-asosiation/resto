@@ -1,11 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Auth\AuthManager;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Vacancy;
 use App\User;
+use App\Restaurant;
+use Illuminate\Support\Facades\Storage;
+ 
+
 
 class UserController extends Controller
 {
@@ -17,8 +23,6 @@ class UserController extends Controller
     public function index()
     {
         $vacancies = Vacancy::get();
-        // $restaurant = Restaurant::find($id);
-
         return view('templates.user.user_index', ['vacancies'  => $vacancies]);
         // return view('templates.user.user_index', ['vacancies'  => $vacancies, 'restaurant' => $restaurant]);
     }
@@ -91,10 +95,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+
+    public function edit($id)
     {
-        $users = User::find($id);
-        return view('templates.user.user_form', ['users'  => $users]);
+        $user = User::find($id);
+        // dd(auth()->user()->email);
+        return view('templates.user.user_form', ['user'  => $user]);
     }
 
     /**
@@ -104,12 +110,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required|min:10',
             'telephone' => 'required|min:10',
-            'address' => 'required',
+            'address' => 'required'
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'cv' => 'required|file|max:1024'
         ], [
             'required' => ':attribute Harus Diisi'
         ]);
@@ -117,25 +125,27 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->telephone = $request->telephone;
-        $user->sex = $request->sex;
-        $user->birth_day = $request->birth_day;
         $user->address = $request->address;
         $user->sex = $request->sex;
+        $user->birth_day = $request->birth_day;
 
         if($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('user');
-            Storage::delete($post->image);
-            $post->image = $imagePath;
+            Storage::delete($user->image);
+            $imagePath = $request->file('image')->store('storage\user\fotoprofil');
+            $user->image = $imagePath;
         }
 
         if($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('user');
             Storage::delete($user->cv);
+            $cvPath = $request->file('cv')->store('storage\user\cv');
             $user->cv = $cvPath;
         }
 
+        // dd();
+
         $user->save();
         return redirect()->route('user.index');
+
     }
 
     /**
