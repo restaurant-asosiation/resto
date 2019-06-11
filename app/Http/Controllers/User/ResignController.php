@@ -40,10 +40,10 @@ class ResignController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'resign_file' => 'required',
-        //     'reason' => 'required'
-        // ]);
+        $this->validate($request, [
+            'resign_file' => 'required',
+            'reason' => 'required'
+        ]);
 
         $user = User::find(auth()->id());
         $restaurant = $user->restaurant()->get()[0];
