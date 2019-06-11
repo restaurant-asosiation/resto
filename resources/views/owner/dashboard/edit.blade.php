@@ -22,32 +22,33 @@
     </div>@endsection
 
 @section('content')
-    <form action="{{ route('owner.dashboard.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('owner.dashboard.update', $restaurant->id) }}" method="post" enctype="multipart/form-data">
         <div class="card mb-3 px-0 mx-auto">
             <div class="card-header">
                 <i class="fas fa-table"></i>
-                Input New Vacancy</div>
+                Edit Vacancy</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}">
+                            <input type="text" name="name" id="name" value="{{ old('name')??$restaurant->name }}" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}">
                             <div class="invalid-feedback">
                                 {{$errors->first('name')}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="telephone">Telephone</label>
-                            <input type="text" name="telephone" id="telephone" value="{{ old('telephone') }}" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}">
+                            <input type="text" name="telephone" id="telephone" value="{{ old('telephone')??$restaurant->telephone }}" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}">
                             <div class="invalid-feedback">
                                 {{$errors->first('telephone')}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" id="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"></textarea>
+                            <textarea name="description" id="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}">{{ old('description')??$restaurant->description }}</textarea>
                             <div class="invalid-feedback">
                                 {{$errors->first('description')}}
                             </div>
@@ -56,21 +57,21 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             <label for="province">Province</label>
-                            <input type="text" name="province" id="province" value="{{ old('province') }}" class="form-control {{ $errors->has('province') ? 'is-invalid' : '' }}">
+                            <input type="text" name="province" id="province" value="{{ old('province')??$restaurant->province }}" class="form-control {{ $errors->has('province') ? 'is-invalid' : '' }}">
                             <div class="invalid-feedback">
                                 {{$errors->first('province')}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="city">City</label>
-                            <input type="text" name="city" id="city" value="{{ old('city') }}" class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}">
+                            <input type="text" name="city" id="city" value="{{ old('city')??$restaurant->city }}" class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}">
                             <div class="invalid-feedback">
                                 {{$errors->first('city')}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="address">address</label>
-                            <textarea name="address" id="address" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"></textarea>
+                            <textarea name="address" id="address" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}">{{ old('address')??$restaurant->address }}</textarea>
                             <div class="invalid-feedback">
                                 {{$errors->first('address')}}
                             </div>
