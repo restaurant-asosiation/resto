@@ -43,10 +43,10 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
 });
 
 
-Route::resource('user', 'UserController')->middleware('auth', 'role:employees');
+Route::resource('user', 'User\UserController')->middleware('auth', 'role:employees');
 
 Route::prefix('user')->middleware('auth', 'role:employee')->name('user.')->group(function(){
-    Route::resource('/view', 'ViewController');  
+    Route::resource('/view', 'User\ViewController');  
     Route::resource('resign', 'User\ResignController'); //route Resign for user
 });
 

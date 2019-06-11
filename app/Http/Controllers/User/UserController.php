@@ -9,8 +9,9 @@ use Illuminate\Support\Str;
 use App\Vacancy;
 use App\User;
 use App\Restaurant;
-// use Illuminate\Support\Facades\Auth; 
-use App\Http\Controllers\User\Storage;
+use Illuminate\Support\Facades\Storage;
+ 
+
 
 class UserController extends Controller
 {

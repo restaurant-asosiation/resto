@@ -50,8 +50,8 @@
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="gender">Jenis Kelamin</label><br>
-                                <input type="radio" name="sex" value="male"> Laki-laki <br>
-                                <input type="radio" name="sex" value="female"> Perempuan <br>
+                                <input type="radio" name="sex" value="1"> Laki-laki <br>
+                                <input type="radio" name="sex" value="2"> Perempuan <br>
                             </div>
                         </div>
                         <div class="row form-group">
