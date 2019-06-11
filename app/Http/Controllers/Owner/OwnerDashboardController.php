@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use App\Restaurant;
+use App\Restaurant;
 use App\Mylibs\WithHelper;
 use Illuminate\Support\Str;
 use App\User;

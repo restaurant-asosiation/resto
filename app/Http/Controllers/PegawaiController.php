@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mylibs\WithHelper;
 use App\Vacancy;
+use App\Restaurant;
+use App\User;
 
 class PegawaiController extends Controller
 {
@@ -14,10 +16,13 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Restaurant $restaurant)
     {
-        $data['vacancies'] = Vacancy::get();
-        return view('owner.pegawai.index', $data);
+        $data['restaurant'] = $restaurant;
+
+        $data['employees'] = $restaurant->user;
+        // dd($data);
+        return view('owner.restaurant.pegawai.index', $data);
     }
 
     /**
@@ -28,7 +33,6 @@ class PegawaiController extends Controller
     public function create()
     {
         //
-        // return view('owner.pelamar.list');
     }
 
     /**
@@ -37,33 +41,32 @@ class PegawaiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Restaurant $restaurant)
     {
-        //
-        $this->validate($request, [
+        // $this->validate($request, [
             
-            'NIP' => 'required',
-            'name' => 'required',
-            'address' => 'required',
-            'position' => 'required',
-            'job_description' => 'required',
-            'requirement' => 'required',
-            'salary' => 'required',
+        //     'NIP' => 'required',
+        //     'name' => 'required',
+        //     'address' => 'required',
+        //     'position' => 'required',
+        //     'job_description' => 'required',
+        //     'requirement' => 'required',
+        //     'salary' => 'required',
             
-        ]);
+        // ]);
 
-        $vacancy = new Vacancy;
-        $vacancy->restaurant_id = auth()->id();
-        $vacancy->NIP = $request->NIP;
-        $vacancy->name = $request->name;
-        $vacancy->address = $request->address;
-        $vacancy->position = $request->position;
-        $vacancy->job_description = $request->job_description;
-        $vacancy->requirement = $request->requirement;
-        $vacancy->salary = $request->salary;
-        $saved = $pegawai->save();
-        $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.pelamar.index')->with($with['withKey'], $with['withValue']);
+        // $vacancy = new Vacancy;
+        // $vacancy->restaurant_id = auth()->id();
+        // $vacancy->NIP = $request->NIP;
+        // $vacancy->name = $request->name;
+        // $vacancy->address = $request->address;
+        // $vacancy->position = $request->position;
+        // $vacancy->job_description = $request->job_description;
+        // $vacancy->requirement = $request->requirement;
+        // $vacancy->salary = $request->salary;
+        // $saved = $pegawai->save();
+        // $with = $withHelper->withCheck($saved);
+        // return redirect()->route('owner.restaurant.pelamar.index', $restaurant)->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -73,9 +76,9 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant)
     {
-        //
+        return view('owner.restaurant.pegawai.index');
     }
 
     /**
@@ -123,7 +126,7 @@ class PegawaiController extends Controller
         $vacancy->salary = $request->salary;
         $saved = $pegawai->save();
         $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.pegawai.index')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('owner.restaurant.pegawai.index')->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -139,6 +142,10 @@ class PegawaiController extends Controller
         $vacancy = Vacancy::find($id);
         $deleted = $vacancy->delete();
         $with = $withHelper->withCheck($deleted);
-        return redirect()->route('owner.pegawai.index')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('owner.restaurant.pegawai.index')->with($with['withKey'], $with['withValue']);
+    }
+    public function list()
+    {
+        return view('owner.restaurant.pegawai.index');
     }
 }

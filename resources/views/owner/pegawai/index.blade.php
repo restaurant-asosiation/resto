@@ -1,7 +1,7 @@
 @extends('templates.admin.admin_default')
 
 @section('sidebar')
-    @include('templates/admin/partials/sidebar_owner')
+    @include('templates.admin.partials.sidebar_owner', ['restaurant' => $restaurant])
 @endsection
 
 @section('title')

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mylibs\WithHelper;
 use App\Vacancy;
+use App\Restaurant;
 
 class PelamarController extends Controller
 {
@@ -16,8 +17,9 @@ class PelamarController extends Controller
      */
     public function index()
     {
+        $data['restaurant'] = $restaurant;
         $data['vacancies'] = Vacancy::get();
-        return view('owner.pelamar.list', $data);
+        return view('owner.restaurant.pelamar.list', $data);
     }
 
     /**
@@ -28,7 +30,8 @@ class PelamarController extends Controller
     public function create()
     {
         //
-        // return view('owner.pelamar.list');
+        $data['restaurant'] = $restaurant;
+        return view('owner.restaurant.pelamar.list');
     }
 
     /**
@@ -37,7 +40,7 @@ class PelamarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Restaurant $restaurant)
     {
         //
         $this->validate($request, [
@@ -61,7 +64,7 @@ class PelamarController extends Controller
         $vacancy->salary = $request->salary;
         $saved = $pelamar->save();
         $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('owner.restaurant.pelamar.list', $restaurant)->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -71,9 +74,10 @@ class PelamarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant)
     {
         //
+        return view('owner.restaurant.pelamar.list');
     }
 
     /**
@@ -119,7 +123,7 @@ class PelamarController extends Controller
         $vacancy->salary = $request->salary;
         $saved = $pelamar->save();
         $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('owner.restaurant.pelamar.list')->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -135,11 +139,11 @@ class PelamarController extends Controller
         $vacancy = Vacancy::find($id);
         $deleted = $vacancy->delete();
         $with = $withHelper->withCheck($deleted);
-        return redirect()->route('owner.pelamar.list')->with($with['withKey'], $with['withValue']);
+        return redirect()->route('owner.restaurant.pelamar.list')->with($with['withKey'], $with['withValue']);
     }
 
     public function list()
     {
-        return view('a');
+        return view('owner.restaurant.pelamar.list');
     }
 }

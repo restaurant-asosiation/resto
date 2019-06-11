@@ -17,7 +17,7 @@
      @if (Request::is('owner/pegawai','owner/pegawai/*'))
         active
       @endif">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route( 'owner.restaurant.pegawai.index',  $restaurant) }}">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>My Employee</span></a>
     </li>
@@ -29,16 +29,16 @@
         <i class="fas fa-briefcase"></i>
         <span>Job Vacancy</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item
     @if (Request::is('owner/pelamar','owner/pelamar/*'))
         active
       @endif">
-      <a class="nav-link" href="{{ route('owner.pelamar.list') }}">
+      <a class="nav-link" href="">
         <i class="fas fa-fw fa-table"></i>
         <span>Recruitment</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="tables.html">
+      <a class="nav-link" href="{{ route( 'owner.restaurant.resign.pdf',  $restaurant) }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Resign</span></a>
     </li>

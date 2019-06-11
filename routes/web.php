@@ -33,11 +33,13 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
         Route::resource('vacancy', 'Owner\VacancyController');
         Route::resource('pelamar', 'Owner\PelamarController');
         Route::resource('pegawai', 'Owner\PegawaiController');
+        Route::get('resign',  'Owner\ProdukController@makePDF');
     });
 });
 
-
-
+Route::get('/resign', 'Owner\ProdukController@makePDF@pdf');
+Route::get('/resign/cetak_pdf', 'Owner\ProdukController@makePDF');
+Route::get('resign',  'Owner\ProdukController@makePDF');
 // Route::get('/list', function () {
 //     return view('list');
 // });
