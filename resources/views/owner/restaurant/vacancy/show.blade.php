@@ -5,13 +5,14 @@
 @endsection
 
 @section('title')
-<h2>Job Vacancy</h2>
+<h2>Recruitment</h2>
 @endsection
 
 @section('content')
-<div class="card mb-3 border-0">
+{{-- <div class="card mb-3 border-0">
     <a href="{{ route('owner.restaurant.vacancy.create', $restaurant) }}" class="btn btn-primary mr-0 ml-auto">New Vacancy</a>
-</div>
+</div> --}}
+
 <!-- DataTables Example -->
 <div class="card mb-3">
     <div class="card-header">
@@ -23,10 +24,14 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <th>#</th>
-                    <th>Position</th>
-                    <th>Job Description</th>
-                    <th>Requirement</th>
-                    <th>Salary</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Telephone</th>
+                    <th>Sex</th>
+                    <th>Birth Day</th>
+                    <th>Address</th>
+                    <th>Image</th>
+                    <th>CV</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
@@ -34,22 +39,21 @@
                         $no = 1;
                     @endphp
 
-                    @foreach ($vacancies as $pegawai)
+                    @foreach ($employees as $employee)
                         <tr>
                             <th scope="row">{{ $no }}</th>
-                            <td><a href="{{ route('owner.restaurant.vacancy.show', [$restaurant, $vacancy]) }}">{{ $vacancy->position }}</a></td>
-                            <td>{{ $vacancy->job_desc }}</td>
-                            <td>{{ $vacancy->requirement }}</td>
-                            <td>{{ $vacancy->salary }}</td>
+                            <td>{{ $employee->name }}</td>
+                            <td>{{ $employee->email }}</td>
+                            <td>{{ $employee->telephone }}</td>
+                            <td>{{ $employee->sex }}</td>
+                            <td>{{ $employee->birth_day }}</td>
+                            <td>{{ $employee->address }}</td>
+                            <td>{{ $employee->image }}</td>
+                            <td>{{ $employee->cv }}</td>
                             <td>
-                                <form action="{{ route('owner.restaurant.vacancy.destroy', ['restaurant'=>$restaurant, 'vacancy'=>$vacancy]) }}" method="post">
-                                <a href="{{ route('owner.restaurant.vacancy.edit', ['vacancy'=>$vacancy, 'restaurant'=>$restaurant]) }}" class="btn btn-primary"><i class="fas fa-pen-square"></i></a>
-                                    @csrf
-                                    @method("DELETE")
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fas fa-minus-square"></i>
-                                    </button>
-                                </form>
+                                <a href="{{ route('owner.restaurant.vacancy.edit') }}" class="btn btn-primary" title="Apply">
+                                    <i class="fas fa-check"></i>
+                                </a>
                             </td>
                         </tr>
                         @php
@@ -60,10 +64,14 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Position</th>
-                        <th>Job Description</th>
-                        <th>Requirement</th>
-                        <th>Salary</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Telephone</th>
+                        <th>Sex</th>
+                        <th>Birth Day</th>
+                        <th>Address</th>
+                        <th>Image</th>
+                        <th>CV</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>

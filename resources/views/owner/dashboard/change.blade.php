@@ -17,7 +17,7 @@
             <h2>Restaurants</h2>
         </div>
         <div class="col d-flex justify-content-end">
-            <a href="{{ route('owner.dashboard.change') }}" class="btn btn-info align-self-center">Change</a>
+            <a href="{{ route('owner.dashboard.index') }}" class="btn btn-info align-self-center">Back</a>
         </div>
     </div>
 @endsection
@@ -34,12 +34,14 @@
                         </div>
                         <div class="mr-5">{{ $restaurant->name }}</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="{{ route('owner.restaurant.dashboard.index', $restaurant) }}">
-                        <span class="float-left">View Details</span>
-                        <span class="float-right">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
+                    <div class="card-footer text-white z-1">
+                        <form action="{{ route('owner.dashboard.destroy', $restaurant->id) }}" method="post">
+                        <a href="{{ route('owner.dashboard.edit', ['dashboard'=>$restaurant->id]) }}" class="btn btn-warning" title="edit"><i class="fas fa-pen-square"></i></a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" title="delete"><i class="fas fa-minus-square"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
         @endforeach

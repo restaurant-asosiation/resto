@@ -16,7 +16,7 @@ class OwnerDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
         $data['restaurants'] = User::find(auth()->id())->restaurant()->get();
         return view('owner.dashboard.index', $data);
@@ -58,7 +58,7 @@ class OwnerDashboardController extends Controller
         $restaurant->city = $request->city;
         $restaurant->address = $request->address;
         if ($request->hasFile('logo')) {
-            $restaurant->logo = $request->file('logo')->store('storage');;
+            $restaurant->logo = $request->file('logo')->store('storage\restaurantLogo');
         }
         $saved = $restaurant->save();
         
@@ -78,9 +78,14 @@ class OwnerDashboardController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('owner.restaurant.dashboard.index');
+        // return view('owner.restaurant.dashboard.index');
     }
 
+    public function change()
+    {
+        $data['restaurants'] = User::find(auth()->id())->restaurant()->get();
+        return view('owner.dashboard.change', $data);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -89,7 +94,8 @@ class OwnerDashboardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['restaurant'] = Restaurant::find($id);
+        return view('owner.dashboard.edit', $data);
     }
 
     /**
@@ -101,7 +107,35 @@ class OwnerDashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'telephone' => 'required',
+            'description' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+        ]);
+
+        $restaurant = Restaurant::find($id);
+
+        $restaurant->name = $request->name;
+        $restaurant->telephone = $request->telephone;
+        $restaurant->description = $request->description;
+        $restaurant->province = $request->province;
+        $restaurant->city = $request->city;
+        $restaurant->address = $request->address;
+        if ($request->hasFile('logo')) {
+            Storage::delete($restaurant->logo); //Deleting old file
+            $imagePath = $request->file('logo')->store('storage\restaurantLogo'); //get file path and storaged
+            $restaurant->logo = $imagePath; //Fill uploaded file path
+        }
+        $saved = $restaurant->save();
+        
+        // Cek file saved and return message
+        $withHelper = new WithHelper;
+        $with = $withHelper->withCheck($saved);
+
+        return redirect()->route('owner.dashboard.index')->with($with['withKey'], $with['withValue']);
     }
 
     /**
@@ -112,6 +146,13 @@ class OwnerDashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $restaurant = Restaurant::find($id);
+        $deleted = $restaurant->delete();
+        
+        //Cek data berhasil dihapus?
+        $withHelper = new WithHelper;
+        $with = $withHelper->withCheck($deleted);
+
+        return redirect()->route('owner.dashboard.index')->with($with['withKey'], $with['withValue']);
     }
 }
