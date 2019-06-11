@@ -30,6 +30,12 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
         Route::resource('vacancy', 'Owner\VacancyController');
     });
 });
+
 Route::prefix('user')->name('user.')->group(function(){
     Route::resource('resign', 'User\ResignController'); //route Resign for user
+
+Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
+    Route::resource('dashboard', 'Admin\AdminDashboardController');
+    Route::resource('addaccount', 'Admin\AdminDashboardController');
+    //resource fungsi pemanggilan dalam landing page admin
 });
