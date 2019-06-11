@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Mylibs\WithHelper;
 use App\Vacancy;
 use App\Restaurant;
+use Illuminate\Support\Str;
 
 class VacancyController extends Controller
 {
@@ -18,8 +19,8 @@ class VacancyController extends Controller
     public function index(Restaurant $restaurant)
     {
         $data['restaurant'] = $restaurant;
-        $data['vacancies'] = Vacancy::get();
-        // dd($data);
+        $data['vacancies'] = Vacancy::where('restaurant_id', $restaurant->id)->get();
+        
         return view('owner.restaurant.vacancy.index', $data);
     }
     
@@ -50,12 +51,14 @@ class VacancyController extends Controller
         ]);
 
         $vacancy = new Vacancy;
-        $vacancy->restaurant_id = 1;
+        $vacancy->restaurant_id = $restaurant->id;
         $vacancy->position = $request->position;
+        $vacancy->slug = Str::slug($request->position);
         $vacancy->job_desc = $request->job_desc;
         $vacancy->salary = $request->salary;
         $vacancy->requirement = $request->requirement;
         $saved = $vacancy->save();
+
         $withHelper = new WithHelper;
         $with = $withHelper->withCheck($saved);
 
@@ -69,9 +72,12 @@ class VacancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant, Vacancy $vacancy)
     {
-        //
+        $data['restaurant'] = $restaurant;
+        $data['employees'] = $vacancy->user;
+
+        return view('owner.restaurant.vacancy.show', $data);
     }
 
     /**

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Resign;
 use App\User;
 use App\Mylibs\WithHelper;
+use App\Restaurant;
+use App\Vacancy;
 
 class ResignController extends Controller
 {
@@ -17,7 +19,9 @@ class ResignController extends Controller
      */
     public function index()
     {
-        //
+        $vacancy = Vacancy::find(2);
+        //$vacancy->restaurant->city;
+        return view('', ['vacancy' => $vacancy]);
     }
     
     /**
@@ -40,14 +44,13 @@ class ResignController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'resign_file' => 'required',
-        //     'reason' => 'required'
-        // ]);
+        $this->validate($request, [
+            'resign_file' => 'required',
+            'reason' => 'required'
+        ]);
 
         $user = User::find(auth()->id());
         $restaurant = $user->restaurant()->get()[0];
-        dd();
         $resign = new Resign;
         $resign->restaurant_id = $restaurant->id;
         $resign->user_id = auth()->id();
