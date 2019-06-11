@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use App\Vacancy;
 use App\User;
 use App\Restaurant;
-use Illuminate\Support\Facades\Auth; 
+// use Illuminate\Support\Facades\Auth; 
 use App\Http\Controllers\User\Storage;
 
 class UserController extends Controller
@@ -115,6 +115,8 @@ class UserController extends Controller
             'name' => 'required|min:10',
             'telephone' => 'required|min:10',
             'address' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cv' => 'required|file|max:1024'
         ], [
             'required' => ':attribute Harus Diisi'
         ]);
@@ -122,25 +124,27 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->telephone = $request->telephone;
+        $user->address = $request->address;
         $user->sex = $request->sex;
         $user->birth_day = $request->birth_day;
-        $user->address = $request->address;
-        // $user->sex = $request->sex;
 
         if($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('user');
-            Storage::delete($post->image);
-            $post->image = $imagePath;
+            Storage::delete($user->image);
+            $imagePath = $request->file('image')->store('storage\user\fotoprofil');
+            $user->image = $imagePath;
         }
 
         if($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('user');
             Storage::delete($user->cv);
+            $cvPath = $request->file('cv')->store('storage\user\cv');
             $user->cv = $cvPath;
         }
 
+        // dd();
+
         $user->save();
         return redirect()->route('user.index');
+
     }
 
     /**
