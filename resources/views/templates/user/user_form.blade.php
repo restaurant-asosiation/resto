@@ -5,6 +5,7 @@
 <!-- Banner starts here -->
 <div class="unit-5" style="background-image: url('{{asset("assets/user/images/hero_bg_2.jpg")}}');">
     <div class="container text-center">
+        {{-- <h6>dd</h6> --}}
         <h2 class="mb-0">Complete Your Profile</h2>
         <p class="mb-0 unit-6"><a href="{{ route('user.index') }}" method="POST">Home</a> <span class="sep">></span> <span>Profile</span></p>
     </div>
@@ -15,15 +16,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-12">
-                    <form action="{{ route('user.update') }}" class="p-5 bg-white" enctype="multipart/form-data" style="width: 70%; margin: auto;" method="POST">
+                    <form action="{{ route('user.update', auth()->id()) }}" class="p-5 bg-white" enctype="multipart/form-data" style="width: 70%; margin: auto;" method="POST">
                         @csrf
-                        {{-- <div class="row form-group">
+                        @method("PUT")
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="email">Email</label>
-                                <input type="text" id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ $users->email }}"
+                                <input type="text" id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ auth()->user()->email }}"
                                      name="email" disabled>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Nama Lengkap</label>
