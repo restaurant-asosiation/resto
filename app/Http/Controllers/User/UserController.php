@@ -115,9 +115,9 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|min:10',
             'telephone' => 'required|min:10',
-            'address' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'cv' => 'required|file|max:1024'
+            'address' => 'required'
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'cv' => 'required|file|max:1024'
         ], [
             'required' => ':attribute Harus Diisi'
         ]);

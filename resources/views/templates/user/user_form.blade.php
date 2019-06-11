@@ -29,50 +29,50 @@
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Nama Lengkap</label>
-                                <input type="text" id="username" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name') }}"
+                                <input type="text" id="username" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ auth()->user()->name }}"
                                     placeholder="Your Username" name="name">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="password">Nomor Handphone</label>
-                                <input type="text" id="password" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ old('telephone') }}"
+                                <input type="text" id="password" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ auth()->user()->telephone }}"
                                     placeholder="Your Password" name="telephone">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Alamat</label>
-                                <input type="text" id="username" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" value="{{ old('address') }}"
+                                <input type="text" id="username" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" value="{{ auth()->user()->address }}"
                                     placeholder="Your Username" name="address">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="gender">Jenis Kelamin</label><br>
-                                <input type="radio" name="sex" value="1"> Laki-laki <br>
-                                <input type="radio" name="sex" value="2"> Perempuan <br>
+                                <input type="radio" name="sex" value="1" @if(old('sex')) checked @endif> Laki-laki <br>
+                                <input type="radio" name="sex" value="2" @if(!old('sex')) checked @endif> Perempuan <br>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Tanggal Lahir </label><span>
                                 </span>
-                                <input type="date" name="birth_day">
+                                <input type="date" name="birth_day" value="{{ auth()->user()->birth_day }}">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="fotoprofil">Foto Profil </label><span>
                                 </span>
-                                <input type="file" name="image">
+                                <input type="file" name="image" value="{{ auth()->user()->image }}">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="cv">Upload CV </label><span>
                                 </span>
-                                <input type="file" name="cv">
+                                <input type="file" name="cv" value="{{ auth()->user()->cv }}">
                             </div>
                         </div>
                         <div class="row form-group">
