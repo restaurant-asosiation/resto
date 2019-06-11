@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
+    Route::get('dashboard/change', 'Owner\OwnerDashboardController@change')->name('dashboard.change');
     Route::resource('dashboard', 'Owner\OwnerDashboardController');
     
     Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
@@ -30,10 +31,11 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     });
 });
 
+Route::prefix('user')->name('user.')->group(function(){
+    Route::resource('resign', 'User\ResignController'); //route Resign for user
+
 Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
     Route::resource('dashboard', 'Admin\AdminDashboardController');
     Route::resource('addaccount', 'Admin\AdminDashboardController');
     //resource fungsi pemanggilan dalam landing page admin
-    
-    
 });
