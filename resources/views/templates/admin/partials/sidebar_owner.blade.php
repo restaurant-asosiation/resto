@@ -1,5 +1,5 @@
 @section('navbarUrl')
-    {{ route('owner.dashboard.index', auth()->user()) }}
+    {{ route('owner.dashboard.index')}}
 @endsection
 @section('navbarName')
     {{ auth()->user()->name }}
