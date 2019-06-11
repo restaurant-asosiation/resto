@@ -21,21 +21,25 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//Route Owner
 Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
-    Route::get('dashboard/change', 'Owner\OwnerDashboardController@change')->name('dashboard.change');
-    Route::resource('dashboard', 'Owner\OwnerDashboardController');
+    Route::get('dashboard/change', 'Owner\OwnerDashboardController@change')->name('dashboard.change'); // change button in dashboard owner
+    Route::resource('dashboard', 'Owner\OwnerDashboardController'); // dashboard CRUD
     
+    //Route Restauarnt, parameter {restaurant} diperoleh dari sidebar.blade
     Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
         Route::resource('dashboard', 'Owner\DashboardController');
         Route::resource('vacancy', 'Owner\VacancyController');
+        Route::get('apply/{user}', 'Owner\RecruitmentController@edit');
+        Route::get('update/{user}', 'Owner\RecruitmentController@update');
     });
 });
 
-Route::resource('user', 'User\UserController')->middleware('auth', 'role:employee');
 
-Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
-    Route::resource('/view', 'User\ViewController');  
+Route::resource('user', 'UserController')->middleware('auth', 'role:employees');
+
+Route::prefix('user')->middleware('auth', 'role:employee')->name('user.')->group(function(){
+    Route::resource('/view', 'ViewController');  
     Route::resource('resign', 'User\ResignController'); //route Resign for user
 });
 
