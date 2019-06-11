@@ -31,15 +31,15 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     });
 });
 
-<<<<<<< HEAD
+Route::resource('user', 'UserController')->middleware('auth', 'role:employees');
+
 Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
-    Route::resource('/', 'UserController');
-=======
+    Route::resource('/view', 'ViewController');  
+});
+
 Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
     Route::resource('dashboard', 'Admin\AdminDashboardController');
     Route::resource('addaccount', 'Admin\AdminDashboardController');
     //resource fungsi pemanggilan dalam landing page admin
-    
-    
->>>>>>> origin/master
+
 });

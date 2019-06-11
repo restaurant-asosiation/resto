@@ -17,9 +17,10 @@ class UserController extends Controller
     public function index()
     {
         $vacancies = Vacancy::get();
+        // $restaurant = Restaurant::find($id);
 
-        // dd($posts);
-        return view('templates.user.user_index');
+        return view('templates.user.user_index', ['vacancies'  => $vacancies]);
+        // return view('templates.user.user_index', ['vacancies'  => $vacancies, 'restaurant' => $restaurant]);
     }
 
     /**
@@ -74,9 +75,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        
+        // dd($id);
+        // dd($vacancy);
+        $vacancy = Vacancy::find($id);
+        return view('templates.user.user_jobdetail', ['vacancy' => $vacancy]);
+        // return view('templates.user.user_index');
     }
 
     /**
@@ -85,10 +91,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, User $user)
+    public function edit(User $user)
     {
         $users = User::find($id);
-
         return view('templates.user.user_form', ['users'  => $users]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -33,7 +34,7 @@ class LoginController extends Controller
         } elseif (auth()->user()->hasRole('owner')) {
             return redirect()->route('owner.dashboard.index');
         } elseif (auth()->user()->hasRole('employees')) {
-            return redirect()->route('user.edit', auth()->user());
+            return redirect()->route('user.index', auth()->user());
         }
 
     }
