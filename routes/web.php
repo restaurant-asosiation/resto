@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route Owner
+Route::get('/view1', function () {
+    return view('viewcalonpegawai');
+});
+
 Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
     Route::get('dashboard/change', 'Owner\OwnerDashboardController@change')->name('dashboard.change'); // change button in dashboard owner
     Route::resource('dashboard', 'Owner\OwnerDashboardController'); // dashboard CRUD
@@ -30,6 +33,10 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
         Route::resource('dashboard', 'Owner\DashboardController');
         Route::resource('vacancy', 'Owner\VacancyController');
+        Route::resource('pelamar', 'Owner\PelamarController');
+        Route::resource('pegawai', 'Owner\PegawaiController');
+        Route::get('resign',  'Owner\ProdukController@makePDF');
+
         Route::get('apply/{user}', 'Owner\RecruitmentController@edit');
         Route::get('update/{user}', 'Owner\RecruitmentController@update');
     });
