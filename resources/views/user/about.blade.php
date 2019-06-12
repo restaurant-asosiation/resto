@@ -1,4 +1,4 @@
-@extends('templates.user.user_default')
+@extends('user.default')
 
 @section('content')
 <div class="unit-5 overlay" style="background-image: url('{{ asset("assets/user/images/img_1.jpg") }}');">

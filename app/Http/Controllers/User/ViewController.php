@@ -14,7 +14,7 @@ class ViewController extends Controller
      */
     public function index()
     {
-        return view('templates.user.about');
+        return view('user.about');
     }
 
     /**
@@ -24,7 +24,7 @@ class ViewController extends Controller
      */
     public function create()
     {
-        return view('templates.user.contact');
+        return view('user.contact');
     }
 
     /**

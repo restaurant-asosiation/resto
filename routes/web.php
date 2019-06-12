@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.index');
     // return view('templates/owner/owner_default');
 });
 
@@ -42,10 +42,10 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     });
 });
 
+// Route::resource('user', 'User\UserController')->middleware('auth', 'role:employees');
+Route::resource('user', 'User\UserController');
 
-Route::resource('user', 'User\UserController')->middleware('auth', 'role:employees');
-
-Route::prefix('user')->middleware('auth', 'role:employee')->name('user.')->group(function(){
+Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
     Route::resource('/view', 'User\ViewController');  
     Route::resource('resign', 'User\ResignController'); //route Resign for user
 });
