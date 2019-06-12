@@ -5,6 +5,7 @@
 <!-- Banner starts here -->
 <div class="unit-5" style="background-image: url('{{asset("assets/user/images/hero_bg_2.jpg")}}');">
     <div class="container text-center">
+        {{-- <h6>dd</h6> --}}
         <h2 class="mb-0">Complete Your Profile</h2>
         <p class="mb-0 unit-6"><a href="{{ route('user.index') }}" method="POST">Home</a> <span class="sep">></span> <span>Profile</span></p>
     </div>
@@ -15,62 +16,63 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-12">
-                    <form action="{{ route('user.update') }}" class="p-5 bg-white" enctype="multipart/form-data" style="width: 70%; margin: auto;" method="POST">
+                    <form action="{{ route('user.update', auth()->id()) }}" class="p-5 bg-white" enctype="multipart/form-data" style="width: 70%; margin: auto;" method="POST">
                         @csrf
-                        {{-- <div class="row form-group">
+                        @method("PUT")
+                        <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="email">Email</label>
-                                <input type="text" id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ $users->email }}"
+                                <input type="text" id="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ auth()->user()->email }}"
                                      name="email" disabled>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Nama Lengkap</label>
-                                <input type="text" id="username" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name') }}"
+                                <input type="text" id="username" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ auth()->user()->name }}"
                                     placeholder="Your Username" name="name">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="password">Nomor Handphone</label>
-                                <input type="text" id="password" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ old('telephone') }}"
+                                <input type="text" id="password" class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}" value="{{ auth()->user()->telephone }}"
                                     placeholder="Your Password" name="telephone">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Alamat</label>
-                                <input type="text" id="username" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" value="{{ old('address') }}"
+                                <input type="text" id="username" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" value="{{ auth()->user()->address }}"
                                     placeholder="Your Username" name="address">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="gender">Jenis Kelamin</label><br>
-                                <input type="radio" name="sex" value="male"> Laki-laki <br>
-                                <input type="radio" name="sex" value="female"> Perempuan <br>
+                                <input type="radio" name="sex" value="1" @if(old('sex')) checked @endif> Laki-laki <br>
+                                <input type="radio" name="sex" value="2" @if(!old('sex')) checked @endif> Perempuan <br>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="username">Tanggal Lahir </label><span>
                                 </span>
-                                <input type="date" name="birth_day">
+                                <input type="date" name="birth_day" value="{{ auth()->user()->birth_day }}">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="fotoprofil">Foto Profil </label><span>
                                 </span>
-                                <input type="file" name="image">
+                                <input type="file" name="image" value="{{ auth()->user()->image }}">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="cv">Upload CV </label><span>
                                 </span>
-                                <input type="file" name="cv">
+                                <input type="file" name="cv" value="{{ auth()->user()->cv }}">
                             </div>
                         </div>
                         <div class="row form-group">
