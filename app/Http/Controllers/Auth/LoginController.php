@@ -28,8 +28,7 @@ class LoginController extends Controller
      */
     public function authenticated()
     {
-        if(auth()->user()->hasRole('admin'))
-        {
+        if(auth()->user()->hasRole('admin')){
             return redirect()->route('admin.dashboard.index');
         } elseif (auth()->user()->hasRole('owner')) {
             return redirect()->route('owner.dashboard.index');

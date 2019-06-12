@@ -39,6 +39,10 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     });
 });
 
+//route Admin
+Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
+    Route::resource('dashboard', 'Admin\AdminDashboardController');
+});
 
 
 Route::resource('user', 'UserController')->middleware('auth', 'role:employees');
