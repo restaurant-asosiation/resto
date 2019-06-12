@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resign extends Model
 {
-protected $table = "resign"
 
     public function user()
     {

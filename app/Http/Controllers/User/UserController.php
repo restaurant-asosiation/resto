@@ -10,7 +10,6 @@ use App\Vacancy;
 use App\User;
 use App\Restaurant;
 use Illuminate\Support\Facades\Storage;
- 
 
 
 class UserController extends Controller
