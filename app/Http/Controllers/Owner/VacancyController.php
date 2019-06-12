@@ -75,8 +75,9 @@ class VacancyController extends Controller
     public function show(Restaurant $restaurant, Vacancy $vacancy)
     {
         $data['restaurant'] = $restaurant;
-        $data['employees'] = $vacancy->user;
-
+        $data['employees'] = $vacancy->user()->wherePivot('status', 1)->get();
+        $data['vacancy'] = $vacancy;
+        
         return view('owner.restaurant.vacancy.show', $data);
     }
 
@@ -90,6 +91,7 @@ class VacancyController extends Controller
     {
         $data['vacancy'] = $vacancy;
         $data['restaurant'] = $restaurant;
+        
         return view('owner.restaurant.vacancy.edit', $data);
     }
 
@@ -117,7 +119,6 @@ class VacancyController extends Controller
         $with = $withHelper->withCheck($saved);
 
         return redirect()->route('owner.restaurant.vacancy.index', $restaurant)->with($with['withKey'], $with['withValue']);
-
     }
 
     /**

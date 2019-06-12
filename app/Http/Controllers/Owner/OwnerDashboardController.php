@@ -8,6 +8,7 @@ use App\Restaurant;
 use App\Mylibs\WithHelper;
 use Illuminate\Support\Str;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class OwnerDashboardController extends Controller
 {

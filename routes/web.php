@@ -29,9 +29,13 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     //Route Restauarnt, parameter {restaurant} diperoleh dari sidebar.blade
     Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
         Route::resource('dashboard', 'Owner\DashboardController');
+        
         Route::resource('vacancy', 'Owner\VacancyController');
-        Route::get('apply/{user}', 'Owner\RecruitmentController@edit');
-        Route::get('update/{user}', 'Owner\RecruitmentController@update');
+        Route::prefix('{vacancy}')->name('vacancy.')->group(function(){
+            Route::get('accept/{user}', 'Owner\RecruitmentController@edit')->name('recruitment.accept');
+            Route::put('reject/{user}', 'Owner\RecruitmentController@reject')->name('recruitment.reject');
+            Route::put('update/{user}', 'Owner\RecruitmentController@update')->name('recruitment.update');
+        });
     });
 });
 
