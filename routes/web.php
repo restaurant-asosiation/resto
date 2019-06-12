@@ -32,18 +32,35 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     //Route Restauarnt, parameter {restaurant} diperoleh dari sidebar.blade
     Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
         Route::resource('dashboard', 'Owner\DashboardController');
+        
         Route::resource('vacancy', 'Owner\VacancyController');
+        Route::prefix('{vacancy}')->name('vacancy.')->group(function(){
+            Route::get('accept/{user}', 'Owner\RecruitmentController@edit')->name('recruitment.accept');
+            Route::put('reject/{user}', 'Owner\RecruitmentController@reject')->name('recruitment.reject');
+            Route::put('update/{user}', 'Owner\RecruitmentController@update')->name('recruitment.update');
+        });
+        
         Route::resource('pelamar', 'Owner\PelamarController');
         Route::resource('pegawai', 'Owner\PegawaiController');
-        Route::get('resign',  'Owner\ProdukController@makePDF');
+        
 
         Route::get('apply/{user}', 'Owner\RecruitmentController@edit');
         Route::get('update/{user}', 'Owner\RecruitmentController@update');
+
+        Route::get('/resign', 'PegawaiResignController@pegawai')->name('resign.pegawai');
+        Route::get('/resign/cetak_pdf', 'PegawaiResignController@cetak_pdf');
     });
 });
 
+
 // Route::resource('user', 'User\UserController')->middleware('auth', 'role:employees');
 Route::resource('user', 'User\UserController');
+
+//route Admin
+Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
+    Route::resource('dashboard', 'Admin\AdminDashboardController');
+});
+
 
 Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
     Route::resource('/view', 'User\ViewController');  
