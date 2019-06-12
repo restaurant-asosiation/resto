@@ -37,7 +37,7 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
-    
+  
     
     <header class="site-navbar py-1" role="banner">
 
@@ -53,8 +53,10 @@
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li class="active"><a href="{{ route('user.index') }}">Home</a></li>
-                <li><a href="{{ route('user.view.index') }}">About</a></li>
+                {{-- <li><a href="{{ route('user.view.index') }}">About</a></li> --}}
                 <li><a href="{{ route('user.view.create') }}">Contact</a></li>
+                <li><a href="{{ route('login') }}"><span class="rounded bg-primary py-2 px-3 text-white"><span
+                        class="h5 mr-2"></span> Login </span></a></li>
                 {{-- <li><a href="{{ route('user.edit') }}">Profile</a></li> --}}
               </ul>
             </nav>

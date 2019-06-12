@@ -53,12 +53,12 @@
                         <div class="job-post-item-header d-flex align-items-center">
                         <h2 class="mr-3 text-black h4">{{ $vacancy->position }}</h2>
                         <div class="badge-wrap">
-                            <span class="bg-primary text-white badge py-2 px-4">Lakin, Beahan and Hickle</span>
+                            <span class="bg-primary text-white badge py-2 px-4">{{ $vacancy->restaurant->name }}</span>
                         </div>
                         </div>
                         <div class="job-post-item-body d-block d-md-flex">
-                        <div class="mr-3"><span class="fl-bigmug-line-portfolio23">{{ $vacancy->salary }}</span></div>
-                        <div><span class="fl-bigmug-line-big104"></span> <span>Lake Lorenzborough</span></div>
+                        <div class="mr-3"><span class="fl-bigmug-line-portfolio23"><span> </span>{{ $vacancy->salary }}</span></div>
+                        <div><span class="fl-bigmug-line-big104"></span> <span>{{ $vacancy->restaurant->city }}</span></div>
                         </div>
                         </div>
                     <div class="ml-auto">

@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route Owner
+Route::get('/view1', function () {
+    return view('viewcalonpegawai');
+});
+
 Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(function(){
     Route::get('dashboard/change', 'Owner\OwnerDashboardController@change')->name('dashboard.change'); // change button in dashboard owner
     Route::resource('dashboard', 'Owner\OwnerDashboardController'); // dashboard CRUD
@@ -36,6 +39,13 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
             Route::put('reject/{user}', 'Owner\RecruitmentController@reject')->name('recruitment.reject');
             Route::put('update/{user}', 'Owner\RecruitmentController@update')->name('recruitment.update');
         });
+        
+        Route::resource('pelamar', 'Owner\PelamarController');
+        Route::resource('pegawai', 'Owner\PegawaiController');
+        Route::get('resign',  'Owner\ProdukController@makePDF');
+
+        Route::get('apply/{user}', 'Owner\RecruitmentController@edit');
+        Route::get('update/{user}', 'Owner\RecruitmentController@update');
     });
 });
 
@@ -44,11 +54,10 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(
     Route::resource('dashboard', 'Admin\AdminDashboardController');
 });
 
-
-Route::resource('user', 'UserController')->middleware('auth', 'role:employees');
+Route::resource('user', 'User\UserController')->middleware('auth', 'role:employees');
 
 Route::prefix('user')->middleware('auth', 'role:employee')->name('user.')->group(function(){
-    Route::resource('/view', 'ViewController');  
+    Route::resource('/view', 'User\ViewController');  
     Route::resource('resign', 'User\ResignController'); //route Resign for user
 });
 
