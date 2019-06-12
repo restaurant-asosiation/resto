@@ -35,10 +35,13 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
         Route::resource('vacancy', 'Owner\VacancyController');
         Route::resource('pelamar', 'Owner\PelamarController');
         Route::resource('pegawai', 'Owner\PegawaiController');
-        Route::get('resign',  'Owner\ProdukController@makePDF');
+        
 
         Route::get('apply/{user}', 'Owner\RecruitmentController@edit');
         Route::get('update/{user}', 'Owner\RecruitmentController@update');
+
+        Route::get('/resign', 'PegawaiResignController@pegawai')->name('resign.pegawai');
+        Route::get('/resign/cetak_pdf', 'PegawaiResignController@cetak_pdf');
     });
 });
 
