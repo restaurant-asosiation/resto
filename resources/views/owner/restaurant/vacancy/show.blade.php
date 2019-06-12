@@ -51,9 +51,15 @@
                             <td>{{ $employee->image }}</td>
                             <td>{{ $employee->cv }}</td>
                             <td>
-                                <a href="{{ route('owner.restaurant.vacancy.edit') }}" class="btn btn-primary" title="Apply">
-                                    <i class="fas fa-check"></i>
-                                </a>
+                                <form action="{{ route('owner.restaurant.vacancy.recruitment.reject', [$restaurant, $vacancy, $employee]) }}" method="post">
+                                    <a href="{{ route('owner.restaurant.vacancy.recruitment.accept', [$restaurant, $vacancy, $employee]) }}" class="btn btn-primary" title="Accept"><i class="fas fa-check"></i></a> {{-- acept --}}
+                                    
+                                    @csrf
+                                    @method("PUT")
+                                    <button type="submit" class="btn btn-danger" title="Reject">
+                                        <i class="fas fa-times"></i> {{-- reject --}}
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @php

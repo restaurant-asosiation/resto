@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function index(Restaurant $restaurant)
     {
         $data['restaurant'] = $restaurant;
-        // dd($data);
+        
         return view('owner.restaurant.dashboard.index', $data);
     }
 
