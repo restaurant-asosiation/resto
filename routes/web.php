@@ -33,22 +33,26 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     Route::prefix('{restaurant}')->name('restaurant.')->group(function(){
         Route::resource('dashboard', 'Owner\DashboardController');
         
+        // Route Vacancy
         Route::resource('vacancy', 'Owner\VacancyController');
         Route::prefix('{vacancy}')->name('vacancy.')->group(function(){
             Route::get('accept/{user}', 'Owner\RecruitmentController@edit')->name('recruitment.accept');
             Route::put('reject/{user}', 'Owner\RecruitmentController@reject')->name('recruitment.reject');
             Route::put('update/{user}', 'Owner\RecruitmentController@update')->name('recruitment.update');
         });
-        
-        Route::resource('pelamar', 'Owner\PelamarController');
-        Route::resource('pegawai', 'Owner\PegawaiController');
-        
 
         Route::get('apply/{user}', 'Owner\RecruitmentController@edit');
         Route::get('update/{user}', 'Owner\RecruitmentController@update');
 
-        Route::get('/resign', 'PegawaiResignController@pegawai')->name('resign.pegawai');
-        Route::get('/resign/cetak_pdf', 'PegawaiResignController@cetak_pdf');
+        Route::resource('pelamar', 'Owner\PelamarController');
+        Route::resource('pegawai', 'Owner\PegawaiController');// get all employee every restaurant
+
+        Route::resource('resign', 'Owner\ResignController');
+        Route::get('rating/{user}', 'Owner\RatingController@createRating')->name('rating.create');
+        Route::post('rating/{user}', 'Owner\RatingController@storeRating')->name('rating.store');
+
+        // Route::get('/resign', 'PegawaiResignController@resign')->name('resign.pegawai');
+        // Route::get('/resign/cetak_pdf', 'PegawaiResignController@cetak_pdf');
     });
 });
 
@@ -61,16 +65,10 @@ Route::get('/update-profile', 'User\UserController@update')->name('user.update')
 //route Admin
 Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
     Route::resource('dashboard', 'Admin\AdminDashboardController');
+    Route::get('register', 'Admin\AdminRegisterController@showForm')->name('register.showForm');
 });
 
 Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
     Route::resource('/view', 'User\ViewController');  
     Route::resource('resign', 'User\ResignController'); //route Resign for user
-});
-
-Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
-    Route::resource('dashboard', 'Admin\AdminDashboardController');
-    Route::resource('addaccount', 'Admin\AdminDashboardController');
-    //resource fungsi pemanggilan dalam landing page admin
-
 });

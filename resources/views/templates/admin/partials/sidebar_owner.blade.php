@@ -14,9 +14,9 @@
       </a>
     </li>
     <li class="nav-item">
-     @if (Request::is('owner/pegawai','owner/pegawai/*'))
+     {{-- @if (Request::is('owner/pegawai','owner/pegawai/*'))
         active
-      @endif">
+      @endif"> --}}
       <a class="nav-link" href="{{ route( 'owner.restaurant.pegawai.index',  $restaurant) }}">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>My Employee</span></a>
@@ -30,13 +30,13 @@
         <span>Job Vacancy</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route( 'owner.restaurant.resign.form',  $restaurant) }}">
+      <a class="nav-link" href="{{ route( 'owner.restaurant.resign.index',  $restaurant) }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Resign</span></a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="far fa-star"></i>
         <span>Rate</span></a>
     </li>
   </ul>
