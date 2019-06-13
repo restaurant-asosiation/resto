@@ -65,24 +65,24 @@
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="fotoprofil">Foto Profil </label>
                                 <span></span>
-                                <div class="custom-file">
+                                <input type="file" name="image"  class="form-control" value="{{ auth()->user()->image }}">
+                                {{-- <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="validatedCustomFile" name="image">
                                     <label class="custom-file-label" for="validatedCustomFile" name="image">{{ auth()->user()->image }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
-                                </div>
-                                {{-- <input type="file" name="image"  class="form-control" value="{{ auth()->user()->image }}"> --}}
+                                </div> --}}
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-md-12 mb-3 mb-md-0">
                                 <label class="font-weight-bold" for="cv">Upload CV </label>
                                 <span></span>
-                                {{-- <input type="file" name="cv"  class="form-control" value="{{ auth()->user()->cv }}"> --}}
-                                <div class="custom-file">
+                                <input type="file" name="cv"  class="form-control" value="{{ auth()->user()->cv }}">
+                                {{-- <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="validatedCustomFile" name="cv">
                                     <label class="custom-file-label" for="validatedCustomFile" name="cv">{{ auth()->user()->cv }}</label>
                                     <div class="invalid-feedback">Example invalid custom file feedback</div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="row form-group">
