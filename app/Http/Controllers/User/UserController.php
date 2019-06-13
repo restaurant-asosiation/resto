@@ -21,8 +21,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        // dd(auth()->id());
         $vacancies = Vacancy::get();
-        return view('templates.user.user_index', ['vacancies'  => $vacancies]);
+        return view('user.index', ['vacancies'  => $vacancies]);
         // return view('templates.user.user_index', ['vacancies'  => $vacancies, 'restaurant' => $restaurant]);
     }
 
@@ -46,30 +47,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'telephone' => 'required',
-            'address' => 'required',
-            'sex' => 'required',
-            'birth_day' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'telephone' => 'required',
+        //     'address' => 'required',
+        //     'sex' => 'required',
+        //     'birth_day' => 'required',
+        // ]);
 
-        $imagePath = $request->file('image')->store('user');
-        $cvPath = $request->file('cv')->store('user');
+        // $imagePath = $request->file('image')->store('user');
+        // $cvPath = $request->file('cv')->store('user');
 
-        $user = new User;
-        $user->name = $request->name;
-        $user->slug = Str::slug($request->name);
-        $user->telephone = $request->telephone;
-        $user->sex = $request->sex;
-        $user->birth_day = $request->birth_day;
-        $user->address = $request->address;
-        $user->image = $imagePath;
-        $user->cv = $cvPath;
-        $saved = $user->save();
-        // $with = $withHelper->withCheck($saved);
-        // return redirect()->route('user.index')->with($with['withKey'], $with['withValue']);
-        return redirect()->route('user.index');
+        // $user = new User;
+        // $user->name = $request->name;
+        // $user->slug = Str::slug($request->name);
+        // $user->telephone = $request->telephone;
+        // $user->sex = $request->sex;
+        // $user->birth_day = $request->birth_day;
+        // $user->address = $request->address;
+        // $user->image = $imagePath;
+        // $user->cv = $cvPath;
+        // $saved = $user->save();
+        // // $with = $withHelper->withCheck($saved);
+        // // return redirect()->route('user.index')->with($with['withKey'], $with['withValue']);
+        // return redirect()->route('user.index');
     }
 
     /**
@@ -84,7 +85,7 @@ class UserController extends Controller
         // dd($id);
         // dd($vacancy);
         $vacancy = Vacancy::find($id);
-        return view('templates.user.user_jobdetail', ['vacancy' => $vacancy]);
+        return view('user.jobdetail', ['vacancy' => $vacancy]);
         // return view('templates.user.user_index');
     }
 
@@ -95,11 +96,16 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit($id)
+    public function edit()
     {
-        $user = User::find($id);
-        // dd(auth()->user()->email);
-        return view('templates.user.user_form', ['user'  => $user]);
+        if ( auth()->id()) {
+            $user = User::find(auth()->id());
+            return view('user.form', ['user'  => $user]);
+        }
+
+        else {
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -140,11 +146,9 @@ class UserController extends Controller
             $user->cv = $cvPath;
         }
 
-        // dd();
-
         $user->save();
         return redirect()->route('user.index');
-
+        
     }
 
     /**
