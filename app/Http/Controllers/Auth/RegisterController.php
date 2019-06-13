@@ -27,9 +27,10 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $roles = Role::get();
-        $data['roles'] = $roles;
-        return view('auth.register', $data);
+        // $roles = Role::get();
+        // $data['roles'] = $roles;
+        // return view('auth.register', $data);
+        return redirect()->route('admin.register.showForm');
     }
     
     /**

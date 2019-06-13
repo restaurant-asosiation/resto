@@ -35,10 +35,15 @@ class RecruitmentController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant, Vacancy $vacancy, User $user)
     {
+        //save nip employee
         $user->nip = $request->nip;
         $saved = $user->save();
 
-        $user->vacancy()->updateExistingPivot($vacancy, ['status'=>2]); // update status == accepted in pivot table user_vacancy
+        // update status == accepted in pivot table user_vacancy
+        $user->vacancy()->updateExistingPivot($vacancy, ['status'=>2]);
+
+        //add employee into restaurant_user
+        $user->restaurant()->attach($restaurant->id);
 
         //data check successfully saved
         $withHelper = new WithHelper;

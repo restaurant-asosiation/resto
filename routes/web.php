@@ -47,7 +47,11 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
         Route::resource('pelamar', 'Owner\PelamarController');
         Route::resource('pegawai', 'Owner\PegawaiController');// get all employee every restaurant
 
-        Route::get('/resign', 'PegawaiResignController@pegawai')->name('resign.pegawai');
+        Route::resource('resign', 'Owner\ResignController');
+        Route::get('rating/{user}', 'Owner\RatingController@createRating')->name('rating.create');
+        Route::post('rating/{user}', 'Owner\RatingController@storeRating')->name('rating.store');
+
+        // Route::get('/resign', 'PegawaiResignController@resign')->name('resign.pegawai');
         // Route::get('/resign/cetak_pdf', 'PegawaiResignController@cetak_pdf');
     });
 });

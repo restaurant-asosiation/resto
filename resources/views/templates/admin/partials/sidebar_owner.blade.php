@@ -30,13 +30,13 @@
         <span>Job Vacancy</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route( 'owner.restaurant.resign.pegawai',  $restaurant) }}">
+      <a class="nav-link" href="{{ route( 'owner.restaurant.resign.index',  $restaurant) }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Resign</span></a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="far fa-star"></i>
         <span>Rate</span></a>
     </li>
   </ul>

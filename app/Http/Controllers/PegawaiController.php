@@ -19,9 +19,8 @@ class PegawaiController extends Controller
     public function index(Restaurant $restaurant)
     {
         $data['restaurant'] = $restaurant;
+        $data['employees'] = $restaurant->user()->role('employee')->get(); //get employee every restaurant
 
-        $data['employees'] = $restaurant->user;
-        dd($data);
         return view('owner.restaurant.pegawai.index', $data);
     }
 

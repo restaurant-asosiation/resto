@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<h2>Pegawai</h2>
+<h2>My Employee</h2>
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
                     @foreach ($employees as $employee)
                         <tr>
                             <th scope="row">{{ $no }}</th>
-                            <td>{{ $employee->NIP }}</td>
+                            <td>{{ $employee->nip }}</td>
                             <td>{{ $employee->name }}</td>
                             <td>{{ $employee->telephone }}</td>
                             <td>{{ $employee->sex }}</td>

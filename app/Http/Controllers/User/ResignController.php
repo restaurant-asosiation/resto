@@ -45,7 +45,7 @@ class ResignController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'resign_file' => 'required',
+            'resign_file' => 'required|file|max:2048', //max 2,048 mb
             'reason' => 'required'
         ]);
 
@@ -55,7 +55,7 @@ class ResignController extends Controller
         $resign->restaurant_id = $restaurant->id;
         $resign->user_id = auth()->id();
         if ($request->hasFile('resign_file')) { //cek file upload kosong?
-            $resign->upload_resign = $request->file('resign_file')->store('storage\resign'); //store file upload
+            $resign->upload_resign = $request->file('resign_file')->store('storage/resign'); //store file upload
         }
         $resign->date = date('Y-m-d'); //mengambil tanggal sekarang
         $resign->reason = $request->reason;
