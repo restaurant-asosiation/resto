@@ -19,4 +19,10 @@
             <span>Register</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Resign Request</span>
+        </a>
+    </li>
 </ul>
