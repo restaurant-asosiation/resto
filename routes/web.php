@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.index');
-    // return view('templates/owner/owner_default');
-});
+// Route::get('/', function () {
+//     return view('user.index');
+//     // return view('templates/owner/owner_default');
+// });
 
 Auth::routes();
 
@@ -52,15 +52,16 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
     });
 });
 
+Route::get('/', 'User\UserController@index')->name('user.index');
+Route::get('/job-details/{id}', 'User\UserController@show')->name('user.show');
+Route::get('/edit-profile', 'User\UserController@edit')->name('user.edit');
+Route::get('/update-profile', 'User\UserController@update')->name('user.update');
 
-// Route::resource('user', 'User\UserController')->middleware('auth', 'role:employees');
-Route::resource('user', 'User\UserController');
 
 //route Admin
 Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
     Route::resource('dashboard', 'Admin\AdminDashboardController');
 });
-
 
 Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
     Route::resource('/view', 'User\ViewController');  

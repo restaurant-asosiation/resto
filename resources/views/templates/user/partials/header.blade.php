@@ -52,11 +52,44 @@
             <nav class="site-navigation text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="{{ route('user.index') }}">Home</a></li>
-                {{-- <li><a href="{{ route('user.view.index') }}">About</a></li> --}}
+                @if (auth()->id())
+                  <li class="nav-item dropdown">
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                          </a>
+
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              @csrf
+                          </form>
+                      </div>
+                  </li>
+
+                {{-- <li class="active"><a href="{{ route('user.index') }}">Home</a></li>
+                <li><a href="{{ route('user.view.create') }}">Contact</a></li>
+                <li><a href="{{ route('logout') }}"><span class="rounded bg-primary py-2 px-3 text-white"><span
+                  class="h5 mr-2"></span> Logout </span></a></li> --}}
+                    
+                @else 
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+
+                {{-- <li class="active"><a href="{{ route('user.index') }}">Home</a></li>
                 <li><a href="{{ route('user.view.create') }}">Contact</a></li>
                 <li><a href="{{ route('login') }}"><span class="rounded bg-primary py-2 px-3 text-white"><span
-                        class="h5 mr-2"></span> Login </span></a></li>
+                  class="h5 mr-2"></span> Login </span></a></li> --}}
+                    
+                @endif
+
+          
                 {{-- <li><a href="{{ route('user.edit') }}">Profile</a></li> --}}
               </ul>
             </nav>

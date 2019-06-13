@@ -147,11 +147,9 @@ class UserController extends Controller
             $user->cv = $cvPath;
         }
 
-        // dd();
-
         $user->save();
         return redirect()->route('user.index');
-
+        
     }
 
     /**
