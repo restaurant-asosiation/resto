@@ -9,11 +9,10 @@ class AdminDashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     *e
      */
     public function index()
-    {
+    { 
         return view('admin.dashboard.index');
     }
 

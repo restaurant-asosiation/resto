@@ -66,7 +66,12 @@ Route::get('/update-profile', 'User\UserController@update')->name('user.update')
 Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
     Route::resource('dashboard', 'Admin\AdminDashboardController');
     Route::get('register', 'Admin\AdminRegisterController@showForm')->name('register.showForm');
-});
+    Route::prefix('rating')->name('rating.')->group(function(){
+        Route::get('view', 'Admin\AdminViewRatingController@showRating')->name('admin.viewRating');
+        Route::get('edit/{user}', 'Admin\AdminViewRatingController@editRating')->name('admin.editRating');
+        Route::get('update/{user}', 'Admin\AdminViewRatingController@updateRating')->name('admin.updateRating');
+    });
+}); 
 
 Route::prefix('user')->middleware('auth', 'role:employees')->name('user.')->group(function(){
     Route::resource('/view', 'User\ViewController');  

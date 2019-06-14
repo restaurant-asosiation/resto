@@ -7,7 +7,7 @@
 
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav">
-    <li class="nav-item">
+    <li class="nav-item"
         <a class="nav-link" href="{{ route('admin.dashboard.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
@@ -22,7 +22,7 @@
     <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fas fa-user-times"></i>
-            <span>Resign</span>
+            <span>User's Rating</span>
         </a>
     </li>
 </ul>

@@ -34,8 +34,10 @@ class RatingController extends Controller
         $rating->restaurant_id = $restaurant->id;
         $rating->rating = $request->rate;
         $rating->comment = $request->comment;
-        $saved = $rating->save();
-        
+        $saved = $rating->save();            
+
+        //add delete employee from restaurant employee list
+
         // change resign_status to accepted
         $resign = Resign::where([
             ['restaurant_id', $restaurant->id],
