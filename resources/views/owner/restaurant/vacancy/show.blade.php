@@ -48,8 +48,8 @@
                             <td>{{ $employee->sex }}</td>
                             <td>{{ $employee->birth_day }}</td>
                             <td>{{ $employee->address }}</td>
-                            <td>{{ $employee->image }}</td>
-                            <td>{{ $employee->cv }}</td>
+                            <td><img src="{{ asset($employee->image) }}" alt="" style="height:100px"></td>
+                            <td><a href="{{ route('owner.restaurant.vacancy.download', [$restaurant, $vacancy, $employee->id]) }}">Download</a></td>
                             <td>
                                 <form action="{{ route('owner.restaurant.vacancy.recruitment.reject', [$restaurant, $vacancy, $employee]) }}" method="post">
                                     <a href="{{ route('owner.restaurant.vacancy.recruitment.accept', [$restaurant, $vacancy, $employee]) }}" class="btn btn-primary" title="Accept"><i class="fas fa-check"></i></a> {{-- acept --}}

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\Mylibs\WithHelper;
+use App\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class AdminRegisterController extends Controller
 {

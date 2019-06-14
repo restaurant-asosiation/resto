@@ -32,8 +32,7 @@
             
             <h3>Requirement</h3><br>
             <p>{{ $vacancy->requirement }}</p>
-            
-            <p class="mt-5"><a href="{{ route('user.edit') }}" class="btn btn-primary  py-2 px-4">Apply Job</a></p>
+            <p class="mt-5"><a href="{{ route('user.edit', $vacancy) }}" class="btn btn-primary  py-2 px-4">Apply Job</a></p>
           </div>
         </div>
 
