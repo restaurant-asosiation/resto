@@ -34,7 +34,7 @@
                         $no = 1;
                     @endphp
 
-                    @foreach ($vacancies as $pegawai)
+                    @foreach ($vacancies as $vacancy)
                         <tr>
                             <th scope="row">{{ $no }}</th>
                             <td><a href="{{ route('owner.restaurant.vacancy.show', [$restaurant, $vacancy]) }}">{{ $vacancy->position }}</a></td>

@@ -5,44 +5,44 @@
 @endsection
 
 @section('title')
-<h2>User's Rating</h2>
+<h2>Resign</h2>
 @endsection
 
 @section('content')
-{{-- <div class="card mb-3 border-0">
-    <a href="{{ route('owner.restaurant.vacancy.create', $restaurant) }}" class="btn btn-primary mr-0 ml-auto">New Vacancy</a>
-</div> --}}
-
 <!-- DataTables Example -->
 <div class="card mb-3">
     <div class="card-header">
         <i class="fas fa-table"></i>
-        User's Rating</div>
+        Data Table Example</div>
     <div class="card-body">
         @include('layouts.alert')
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Resto</th>
-                    <th>Rating</th>
-                    <th>Action</th>
+					<th>Name</th>
+					<th>Date</th>
+					<th>Reason</th>
+					<th>Resign_Status</th>
+					<th>PDF</th>
+					<th>Actions</th>
                 </thead>
                 <tbody>
                     @php
                         $no = 1;
                     @endphp
 
-                    @foreach ($ratings as $rating)
+                    @foreach ($resigns as $resign)
                         <tr>
                             <th scope="row">{{ $no }}</th>
-                            <td>{{ $rating->user->name }}</a></td>
-                            <td>{{ $rating->restaurant->name }}</td>
-                            <td>{{ $rating->rating }}</td>
-                            <td>{{ $rating->comment }}</td>
+                            <td>{{ $resign->user->name }}</td>
+                            <td>{{ $resign->date }}</td>
+                            <td>{{ $resign->reason }}</td>
+                            <td>{{ $resign->resign_status }}</td>
+                            <td><a href="{{ route('owner.restaurant.resign.show', [$restaurant, $resign]) }}">Download</a></td>
                             <td>
-                                <a href="{{ route('admin.editRating', ['vacancy'=>$vacancy, 'restaurant'=>$restaurant]) }}" class="btn btn-primary"><i class="fas fa-pen-square"></i></a>
+                                <a href="{{ route('owner.restaurant.rating.create', [$restaurant, $resign->user]) }}" class="btn btn-primary" title="Accept"><i class="fas fa-check"></i></a> {{-- accept and redirect to rating form --}}
+                                <a href="" class="btn btn-danger" title="Reject"><i class="fas fa-times"></i></a> {{-- acept --}}
                             </td>
                         </tr>
                         @php
@@ -54,10 +54,11 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Position</th>
-                        <th>Resto</th>
-                        <th>Rating</th>
-                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Reason</th>
+                        <th>Resign_Status</th>
+                        <th>PDF</th>
+                        <th>Actions</th>
                     </tr>
                 </tfoot>
             </table>

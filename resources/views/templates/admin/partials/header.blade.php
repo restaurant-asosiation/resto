@@ -19,6 +19,9 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('assets/admin/css/sb-admin.css') }}" rel="stylesheet">
+  
+  <!-- Custom styles for rating-->
+  <link href="{{ asset('css/rating_style.css') }}" rel="stylesheet">
 
 </head>
 

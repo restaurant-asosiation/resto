@@ -19,9 +19,8 @@ class PegawaiController extends Controller
     public function index(Restaurant $restaurant)
     {
         $data['restaurant'] = $restaurant;
+        $data['employees'] = $restaurant->user()->role('employee')->get(); //get employee every restaurant
 
-        $data['employees'] = $restaurant->user;
-        // dd($data);
         return view('owner.restaurant.pegawai.index', $data);
     }
 
@@ -103,30 +102,30 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $this->validate($request, [
+        // //
+        // $this->validate($request, [
             
-            'NIP' => 'required',
-            'name' => 'required',
-            'address' => 'required',
-            'position' => 'required',
-            'job_description' => 'required',
-            'requirement' => 'required',
-            'salary' => 'required',
-        ]);
+        //     'NIP' => 'required',
+        //     'name' => 'required',
+        //     'address' => 'required',
+        //     'position' => 'required',
+        //     'job_description' => 'required',
+        //     'requirement' => 'required',
+        //     'salary' => 'required',
+        // ]);
 
-        $vacancy = new Vacancy;
-        $vacancy->restaurant_id = auth()->id();
-        $vacancy->NIP = $request->NIP;
-        $vacancy->name = $request->name;
-        $vacancy->address = $request->address;
-        $vacancy->position = $request->position;
-        $vacancy->job_description = $request->job_description;
-        $vacancy->requirement = $request->requirement;
-        $vacancy->salary = $request->salary;
-        $saved = $pegawai->save();
-        $with = $withHelper->withCheck($saved);
-        return redirect()->route('owner.restaurant.pegawai.index')->with($with['withKey'], $with['withValue']);
+        // $vacancy = new Vacancy;
+        // $vacancy->restaurant_id = auth()->id();
+        // $vacancy->NIP = $request->NIP;
+        // $vacancy->name = $request->name;
+        // $vacancy->address = $request->address;
+        // $vacancy->position = $request->position;
+        // $vacancy->job_description = $request->job_description;
+        // $vacancy->requirement = $request->requirement;
+        // $vacancy->salary = $request->salary;
+        // $saved = $pegawai->save();
+        // $with = $withHelper->withCheck($saved);
+        // return redirect()->route('owner.restaurant.pegawai.index')->with($with['withKey'], $with['withValue']);
 
     }
 
@@ -138,14 +137,14 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $vacancy = Vacancy::find($id);
-        $deleted = $vacancy->delete();
-        $with = $withHelper->withCheck($deleted);
-        return redirect()->route('owner.restaurant.pegawai.index')->with($with['withKey'], $with['withValue']);
+        // //
+        // $vacancy = Vacancy::find($id);
+        // $deleted = $vacancy->delete();
+        // $with = $withHelper->withCheck($deleted);
+        // return redirect()->route('owner.restaurant.pegawai.index')->with($with['withKey'], $with['withValue']);
     }
-    public function list()
-    {
-        return view('owner.restaurant.pegawai.index');
-    }
+    // public function list()
+    // {
+    //     return view('owner.restaurant.pegawai.index');
+    // }
 }

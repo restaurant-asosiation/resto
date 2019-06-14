@@ -7,22 +7,22 @@
 
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav">
-    <li class="nav-item">
+    <li class="nav-item"
         <a class="nav-link" href="{{ route('admin.dashboard.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+        <a class="nav-link" href="{{ route('admin.register.showForm') }}">
+            <i class="fas fa-user-plus"></i>
             <span>Register</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Resign Request</span>
+            <i class="fas fa-user-times"></i>
+            <span>User's Rating</span>
         </a>
     </li>
 </ul>

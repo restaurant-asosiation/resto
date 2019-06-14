@@ -1,19 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Resign;
+use App\Restaurant;
+use App\User;
 
-class AdminDashboardController extends Controller
+class ResignController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *e
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function index()
-    { 
-        return view('admin.dashboard.index');
+    public function index(Restaurant $restaurant)
+    {
+        $resigns = Resign::where('restaurant_id', $restaurant->id)->get();
+        $data['resigns'] = $resigns;
+        $data['restaurant'] = $restaurant;
+        
+        return view('owner.restaurant.resign.index', $data);
     }
 
     /**
@@ -38,14 +46,22 @@ class AdminDashboardController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Download the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant, $resign)
     {
-        //
+        $resign = Resign::find($resign)->first();
+        $resignPath = $resign->upload_resign;
+        $fileName = $resign->date."-".$resign->user->name;
+
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+
+        return response()->download($resignPath, $fileName, $headers);
     }
 
     /**
@@ -54,7 +70,7 @@ class AdminDashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Restaurant $restaurant, User $user)
     {
         //
     }
