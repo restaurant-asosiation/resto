@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-12">
-                    <form action="{{ route('user.update', auth()->id()) }}" class="p-5 bg-white" enctype="multipart/form-data" style="width: 70%; margin: auto;" method="POST">
+                    <form action="{{ route('user.update', $vacancy) }}" class="p-5 bg-white" enctype="multipart/form-data" style="width: 70%; margin: auto;" method="POST">
                         @csrf
                         @method("PUT")
                         <div class="row form-group">

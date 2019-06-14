@@ -39,15 +39,9 @@ class RegisterController extends Controller
      * @var string
      */
 
-    // protected $redirectTo = '/home';
+    // protected $redirectTo = return route('admin.register.showForm');
     protected function redirectTo(){
-        if(auth()->user()->hasRole('admin')){
-            return redirect()->route('admin.dashboard.index');
-        } elseif (auth()->user()->hasRole('owner')) {
-            return route('owner.dashboard.index');
-        } elseif (auth()->user()->hasRole('employee')) {
-            return redirect()->route('user.resign');
-        }
+        route('admin.register.showForm');
     }
 
     /**

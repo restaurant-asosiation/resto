@@ -1,5 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\User;
+use App\Restaurant;
+use App\Vacancy;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +39,18 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
         // Route Vacancy
         Route::resource('vacancy', 'Owner\VacancyController');
         Route::prefix('{vacancy}')->name('vacancy.')->group(function(){
+            Route::get('download/{id}', function(Restaurant $restaurant, Vacancy $vacancy, $id){
+                $user = User::find($id);
+                $userPath = $user->cv;
+                $fileName = $user->date."-".$user->name;
+
+                $headers = array(
+                    'Content-Type: application/pdf',
+                );
+                
+                return response()->download($userPath, $fileName, $headers);
+            })->name('download');
+
             Route::get('accept/{user}', 'Owner\RecruitmentController@edit')->name('recruitment.accept');
             Route::put('reject/{user}', 'Owner\RecruitmentController@reject')->name('recruitment.reject');
             Route::put('update/{user}', 'Owner\RecruitmentController@update')->name('recruitment.update');
@@ -57,19 +72,22 @@ Route::prefix('owner')->middleware('auth', 'role:owner')->name('owner.')->group(
 });
 
 Route::get('/', 'User\UserController@index')->name('user.index');
+
 Route::get('/job-details/{id}', 'User\UserController@show')->name('user.show');
-Route::get('/edit-profile', 'User\UserController@edit')->name('user.edit');
-Route::get('/update-profile', 'User\UserController@update')->name('user.update');
+Route::get('/edit-profile/{vacancy}', 'User\UserController@edit')->name('user.edit');
+Route::put('/update-profile/{vacancy}', 'User\UserController@update')->name('user.update');
 
 
 //route Admin
 Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin.')->group(function(){
     Route::resource('dashboard', 'Admin\AdminDashboardController');
     Route::get('register', 'Admin\AdminRegisterController@showForm')->name('register.showForm');
+    Route::post('register', 'Admin\AdminRegisterController@create')->name('register.create');
+
     Route::prefix('rating')->name('rating.')->group(function(){
-        Route::get('view', 'Admin\AdminViewRatingController@showRating')->name('admin.viewRating');
-        Route::get('edit/{user}', 'Admin\AdminViewRatingController@editRating')->name('admin.editRating');
-        Route::get('update/{user}', 'Admin\AdminViewRatingController@updateRating')->name('admin.updateRating');
+        Route::get('view', 'Admin\AdminViewRatingController@showRating')->name('viewRating');
+        // Route::get('edit/{user}', 'Admin\AdminViewRatingController@editRating')->name('editRating');
+        // Route::get('update/{user}', 'Admin\AdminViewRatingController@updateRating')->name('updateRating');
     });
 }); 
 

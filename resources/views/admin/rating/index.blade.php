@@ -1,7 +1,7 @@
 @extends('templates.admin.admin_default')
 
 @section('sidebar') {{-- @yield in admin_default --}}
-    @include('templates.admin.partials.sidebar_owner', ['restaurant' => $restaurant])
+    @include('templates.admin.partials.sidebar_admin')
 @endsection
 
 @section('title')
@@ -54,7 +54,6 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Position</th>
                         <th>Resto</th>
                         <th>Rating</th>
                         <th>Action</th>

@@ -34,9 +34,9 @@
         <i class="fas fa-fw fa-table"></i>
         <span>Resign</span></a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <a class="nav-link" href="tables.html">
         <i class="far fa-star"></i>
         <span>Rate</span></a>
-    </li>
+    </li> --}}
   </ul>

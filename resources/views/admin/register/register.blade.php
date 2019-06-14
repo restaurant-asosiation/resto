@@ -16,7 +16,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    @include('layouts.alert')
+                    <form method="POST" action="{{ route('admin.register.create') }}">
                         @csrf
 
                         <div class="form-group row">

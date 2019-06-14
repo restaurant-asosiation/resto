@@ -96,11 +96,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit()
+    public function edit(Vacancy $vacancy)
     {
         if ( auth()->id()) {
             $user = User::find(auth()->id());
-            return view('user.form', ['user'  => $user]);
+            return view('user.form', ['user'  => $user, 'vacancy' => $vacancy]);
         }
 
         else {
@@ -115,7 +115,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Vacancy $vacancy)
     {
         $this->validate($request, [
             'name' => 'required|min:10',
@@ -127,7 +127,7 @@ class UserController extends Controller
             'required' => ':attribute Harus Diisi'
         ]);
 
-        $user = User::find($id);
+        $user = User::find(auth()->id());
         $user->name = $request->name;
         $user->telephone = $request->telephone;
         $user->address = $request->address;
@@ -147,6 +147,11 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        //save to user vacancy
+        $vacancy->user()->attach(auth()->id());
+
+
         return redirect()->route('user.index');
         
     }
