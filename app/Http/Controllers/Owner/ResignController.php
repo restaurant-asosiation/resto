@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Resign;
 use App\Restaurant;
 use App\User;
+use App\Mylibs\WithHelper;
 
 class ResignController extends Controller
 {
@@ -17,7 +18,12 @@ class ResignController extends Controller
      */
     public function index(Restaurant $restaurant)
     {
-        $resigns = Resign::where('restaurant_id', $restaurant->id)->get();
+        //get resign berdasarkan restaurant id dan status == processed
+        $resigns = Resign::where([
+            ['restaurant_id', $restaurant->id],
+            ['resign_status', 1]
+        ])->get();
+
         $data['resigns'] = $resigns;
         $data['restaurant'] = $restaurant;
         
@@ -93,8 +99,16 @@ class ResignController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Restaurant $restaurant, Resign $resign)
     {
-        //
+        //change resign status on resigns to rejected
+        $resign->resign_status = 3;
+        $saved = $resign->save();
+
+        //HelperCheck
+        $withHelper = new WithHelper;
+        $with = $withHelper->withCheck($saved);
+
+        return redirect()->route('owner.restaurant.resign.index',  $restaurant)->with($with['withKey'], $with['withValue']);
     }
 }

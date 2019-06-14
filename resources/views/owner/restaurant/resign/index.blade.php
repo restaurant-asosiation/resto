@@ -41,8 +41,14 @@
                             <td>{{ $resign->resign_status }}</td>
                             <td><a href="{{ route('owner.restaurant.resign.show', [$restaurant, $resign]) }}">Download</a></td>
                             <td>
-                                <a href="{{ route('owner.restaurant.rating.create', [$restaurant, $resign->user]) }}" class="btn btn-primary" title="Accept"><i class="fas fa-check"></i></a> {{-- accept and redirect to rating form --}}
-                                <a href="" class="btn btn-danger" title="Reject"><i class="fas fa-times"></i></a> {{-- acept --}}
+                                <form action="{{ route('owner.restaurant.resign.destroy', [$restaurant, $resign]) }}" method="post">
+                                    <a href="{{ route('owner.restaurant.rating.create', [$restaurant, $resign->user]) }}" class="btn btn-primary" title="Accept"><i class="fas fa-check"></i></a> {{-- accept and redirect to rating form --}}
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" title="Reject"> {{-- reject --}}
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @php
